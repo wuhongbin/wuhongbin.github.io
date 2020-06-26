@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算法和算法分析基础 | 时光如水の总是无言</title><meta name="description" content="这篇博文我总结了一下算法基础的一些知识点…   ##前言抽象化是一种非常的不同于模糊化的东西 … 抽象的目的并不是为了模糊，而是为了创造出一种能让我们做到百分百精确的新语义。"><meta name="keywords" content="categories-github"><meta name="author" content="时光如水の总是无言"><meta name="copyright" content="时光如水の总是无言"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wuhongbin.github.io/2020/03/16/%E7%AE%97%E6%B3%95%E5%92%8C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="算法和算法分析基础"><meta property="og:url" content="https://wuhongbin.github.io/2020/03/16/%E7%AE%97%E6%B3%95%E5%92%8C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/"><meta property="og:site_name" content="时光如水の总是无言"><meta property="og:description" content="这篇博文我总结了一下算法基础的一些知识点…   ##前言抽象化是一种非常的不同于模糊化的东西 … 抽象的目的并不是为了模糊，而是为了创造出一种能让我们做到百分百精确的新语义。"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-03-16T12:10:43.000Z"><meta property="article:modified_time" content="2020-04-10T13:56:33.895Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="C++ new 运算符 用法总结" href="https://wuhongbin.github.io/2020/03/17/C++%20new%20%E8%BF%90%E7%AE%97%E7%AC%A6%20%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/"><link rel="next" title="数据结构基础" href="https://wuhongbin.github.io/2020/03/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: ,
+  isSidebar: false
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">33</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">13</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book-open"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-smile-wink"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw far fa-comment-dots"></i><span> 留言</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">时光如水の总是无言</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book-open"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-smile-wink"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw far fa-comment-dots"></i><span> 留言</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">算法和算法分析基础</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-03-16 20:10:43"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-03-16</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-04-10 21:56:33"><i class="fas fa-history fa-fw"></i> 更新于 2020-04-10</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/">算法解析</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 5 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>这篇博文我总结了一下算法基础的一些知识点…</p>
+<a id="more"></a>
+<blockquote>
+<p>##前言<br>抽象化是一种非常的不同于模糊化的东西 … 抽象的目的并不是为了模糊，而是为了创造出一种能让我们做到百分百精确的新语义。<br>                                                                                                                        ——— Edsger Dijkstra</p>
+</blockquote>
+<p>##算法VS程序<br>很多人误以为程序就是算法，其实不然：算法是解决某个问题的想法、思路；而程序是在心中有算法的前提下编写出来的可以运行的代码。</p>
+<p>例如，要解决依次输出一维数组中的数据元素的值的问题，首先想到的是使用循环结构（ for 或者 while ），在有这个算法的基础上，开始编写程序。</p>
+<p>所以，算法相当于是程序的雏形。当解决问题时，首先心中要有解决问题的算法，围绕算法编写出程序代码。</p>
+<p>##算法定义：<br><strong>算法</strong> 是解决特定问题求解步骤的描述，它是指令的有限序列，其中每条指令表示一个或多个操作</p>
+<p>##算法的五大特性    </p>
+<blockquote>
+<p>（1）<strong>有穷性：</strong>算法在有限的步骤之后会自动结束而不会无限循环，并且每一个步骤可以在可接受的时间内完成<br>（2）<strong>确定性：</strong>算法中的每一步都有确定的含义，不会出现二义性<br>（3）<strong>可行性：</strong>算法的每一步都是可行的，也就是说每一步都能够执行有限的次数完成<br>（4）<strong>输入：</strong>算法具有0个或多个输入<br>（5）<strong>输出：</strong>算法至少有1个或多个输出</p>
+</blockquote>
+<p>##算法设计的要求</p>
+<blockquote>
+<p>（1）<strong>正确性：</strong>满足具体问题的需求<br>（2）<strong>可读性：</strong>便于自己和他人的阅读交流，帮助人更好的理解算法<br>（3）<strong>健壮性：</strong>当输入非法时，能适当做出反应处理，而不是输出莫名其妙的结果<br>（4）<strong>效率与低储存量需求：</strong>尽可能减少算法执行的时间及执行过程中占用的内存 </p>
+</blockquote>
+<p>##衡量算法优劣<br>一个算法的优劣主要从以下两个方面衡量：</p>
+<p>算法的运行时间。（称为“<strong>时间复杂度</strong>”）<br>运行算法所需的内存空间大小。（称为“<strong>空间复杂度</strong>”）</p>
+<p><strong>好算法的标准</strong>就是：在符合算法本身的要求的基础上，使用算法编写的程序运行的<strong>时间短</strong>，运行过程中占用的<strong>内存空间少</strong>，就可以称这个算法是“好算法”。</p>
+<p>##时间复杂度<br>首先要说的是，时间复杂度的计算并不是计算程序具体运行的时间，而是 <strong>算法执行语句的次数。</strong> 当我们面前有多个算法时，我们可以通过计算时间复杂度，判断出哪一个算法在具体执行时花费时间最多和最少。</p>
+<p>###常见的时间复杂度有</p>
+<blockquote>
+<p>常数阶 O(1)     &lt;  对数阶 O(log2 n) &lt;   线性阶 O(n)      &lt;线性对数阶 O(n log2 n) &lt;<br>平方阶 O(n^2) &lt;  立方阶 &lt; O(n^3)  &lt;  k次方阶 O(n^K) &lt; 指数阶 O(2^n)<br>随着n的不断增大，时间复杂度不断增大，算法花费时间越多。</p>
+</blockquote>
+<p>###计算方法<br>①选取相对增长最高的项<br>②最高项系数是都化为1<br>③若是常数的话用 O(1) 表示<br>例如：f（n）=2*n^3+2n+100 , 则 O(n) = n^3。<br>通常我们计算时间复杂度都是计算最坏情况<br>###时间复杂度的计算<br>（1）如果算法的执行时间不随着问题规模n的增加而增长，即使算法中有上千条语句，其执行时间也不过是一个较大的常数。此类算法的时间复杂度是O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1     int x&#x3D;1;</span><br><span class="line">2     while (x &lt;10)</span><br><span class="line">3     &#123;</span><br><span class="line">4         x++;</span><br><span class="line">5     &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>分析：该算法执行次数是10，是一个常数，用时间复杂度表示是 O(1)。</strong></p>
+<p>（2）当有若干个循环语句时，算法的时间复杂度是由嵌套层数最多的循环语句中最内层语句的频度f(n)决定的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1  for (i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">2     &#123;</span><br><span class="line">3         for (j &#x3D; 0; j &lt; n; j++)</span><br><span class="line">4         &#123;</span><br><span class="line">5             ;</span><br><span class="line">6         &#125;</span><br><span class="line">7     &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>分析：该算法for循环，最外层循环每执行一次，内层循环都要执行n次，执行次数是根据n所决定的，时间复杂度是O(n^2)。</strong></p>
+<p>（3）循环不仅与n有关，还与执行循环所满足的判断条件有关。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 int i&#x3D;0;</span><br><span class="line">2 while (i &lt; n &amp;&amp; arr[i]!&#x3D;1)</span><br><span class="line">3     &#123;</span><br><span class="line">4         i++;</span><br><span class="line">5     &#125;</span><br></pre></td></tr></table></figure>
+<p> 在此循环，如果arr[i]不等于1的话，时间复杂度是O（n）。如果arr[i]等于1的话，则循环不能执行，时间复杂度是0。</p>
+<p>##空间复杂度<br>空间复杂度是对一个算法在运行过程中临时占用存储空间大小的量度。<br>###计算方法<br>①忽略常数，用O(1)表示<br>②递归算法的空间复杂度 = 递归深度N × 每次递归所要的辅助空间<br>③对于单线程来说，递归有运行时堆栈，求的是递归最深的那一次压栈所耗费的空间的个数，因为递归最深的那一次所耗费的空间足以容纳它所有递归过程。</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 int a;</span><br><span class="line">2 int b;</span><br><span class="line">3 int c;</span><br><span class="line">4 printf(&quot;%d %d %d \n&quot;,a,b,c);</span><br></pre></td></tr></table></figure>
+<p><strong>分析：它的空间复杂度 O(n) = O(1)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 int fun(int n,)</span><br><span class="line">2 &#123;</span><br><span class="line">3 int k&#x3D;10;</span><br><span class="line">4 if（n&#x3D;&#x3D;k)</span><br><span class="line">5 return n;</span><br><span class="line">6 else</span><br><span class="line">7 return fun(++n);</span><br><span class="line">8 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>分析：递归实现，调用fun函数，每次都创建1个变量k。调用n次，空间复杂度 O(n*1) = O(n)。</strong></p>
+<p>##拿时间换空间，用空间换时间</p>
+<p>算法的时间复杂度和空间复杂度是可以相互转化的。</p>
+<p>谷歌浏览器相比于其他的浏览器，运行速度要快。是因为它占用了更多的内存空间，以空间换取了时间。</p>
+<p>算法中，例如判断某个年份是否为闰年时，如果想以时间换取空间，算法思路就是：当给定一个年份时，判断该年份是否能被4或者400整除，如果可以，就是闰年。</p>
+<p>如果想以空间换时间的话，判断闰年的思路就是：把所有的年份先判断出来，存储在数组中（年份和数组下标对应），如果是闰年，数组值是1，否则是0；当需要判断某年是否为闰年时，直接看对应的数组值是1还是0，不用计算就可以马上知道。</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光如水の总是无言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://wuhongbin.github.io/2020/03/16/%E7%AE%97%E6%B3%95%E5%92%8C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/">https://wuhongbin.github.io/2020/03/16/%E7%AE%97%E6%B3%95%E5%92%8C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wuhongbin.github.io" target="_blank">时光如水の总是无言</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><button class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信" onclick="window.open('/img/wechat.jpg')"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付宝" onclick="window.open('/img/alipay.jpg')"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></button></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/17/C++%20new%20%E8%BF%90%E7%AE%97%E7%AC%A6%20%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/"><img class="prev-cover" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ new 运算符 用法总结</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/"><img class="next-cover" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构基础</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC80OTEyOS8yNTYyMw=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 时光如水の总是无言</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">本博客所有内容均收集于互联网或自己创作,方便于网友与自己学习交流，如有侵权，请留言，立即处理!!!</div><div class="icp"><a href="http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>© 晋ICP备案87654321号-8</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">简</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/ClickShowText.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
