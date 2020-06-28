@@ -91,31 +91,6 @@
     
     
     <entry>
-      <title>Linux系统分区方案</title>
-      <link href="/2020/05/16/Linux%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%96%B9%E6%A1%88/"/>
-      <url>/2020/05/16/Linux%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%96%B9%E6%A1%88/</url>
-      
-        <content type="html"><![CDATA[<h2 id="简单分区方案"><a href="#简单分区方案" class="headerlink" title="简单分区方案"></a>简单分区方案</h2><p>实际上，很多时候我们只需要分两个区：<code>/</code>和交换分区，日常使用基本不会有任何影响，甚至于交换分区对于现在的电脑来说都不是必要的，我们完全可以只分配一个根分区。linux只需要一个/根分区就可以正常运行。</p><h2 id="常用分区方案"><a href="#常用分区方案" class="headerlink" title="常用分区方案"></a>常用分区方案</h2><p>以使用 <strong>100G 空间</strong> 安装 linux 为例，各目录含义，请参考文章结尾附录。</p><table><thead><tr><th align="center">目录类型</th><th align="center">挂载点</th><th align="center">分区格式</th><th align="center">大小</th></tr></thead><tbody><tr><td align="center">根目录</td><td align="center">/</td><td align="center">ext4</td><td align="center">20-40G</td></tr><tr><td align="center">家目录</td><td align="center">/home</td><td align="center">ext4</td><td align="center">剩余所有空间</td></tr><tr><td align="center">交换分区</td><td align="center">swap</td><td align="center">无</td><td align="center">2G</td></tr></tbody></table><p><strong><font color=red>注意：</font></strong> 交换分区 无挂载点 分区格式选择交换分区（swap） 最大不建议超过真实内存大小，除非内存小于2G，你的内存大于4G，推荐2G即可，没必要有些人推荐的与内存相当。</p><h2 id="DIY分区方案"><a href="#DIY分区方案" class="headerlink" title="DIY分区方案"></a>DIY分区方案</h2><p>更高级的分区，我们就要了解一下自己电脑的使用场景。</p><p>linux的整体目录就是一个树状结构，根据文章结尾的附录一，我们会知道/分区下的各个目录存放的内容都是不一样的，所以他们的内容变化速度也会不一样。</p><p>了解了这些，试想一个场景，如果我们只分配一个/分区，内容增加速度快的目录，比如个人桌面系统的/home，服务器的/var目录可能会迅速占领大部分的存储容量，以至于当存储容量用尽时出现电脑无法开机的现象。</p><p>为了避免出现这样的情形，我们可以给电脑分区，然后将分区‘挂载’到根分区的指定目录，限制目录的大小，同时保护一些重要目录，比如/boot，这样，即便目录某个目录扩张很快，最终也只会占用我们分配的大小，不会影响到电脑的正常运行。所以第二种方法里，我们把/boot和/home单独分了出来，避免/分区的内容扩张影响到系统启动，同时，分配/home分区可以在电脑系统崩溃，重装系统时避免个人文件丢失，直接将分区挂载上去，个人的数据就不会丢失。</p><p>但是有的时候，我们要安装linux是给服务器安装的，这时，/home就不应该分配这么多空间了，因为对于个人电脑桌面系统，我们可能需要安装很多的软件、文件和视频音乐等，会导致/home目录变得十分臃肿，而其他目录相对来说比较小。不过对于服务器来说，更占用存储的地方可能集中在了/var目录，比如日志文件，比如web服务器的根目录，一般都在/var目录中，这时，我们就应该给/var目录分配更多的空间，保证服务器的正常运行。当然，如果你的服务器目录结构是自己组织的，你就要按照你自己电脑的情况来分析你的电脑该如何来选择分区。</p><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><table><thead><tr><th align="center">目录名</th><th align="center">简介</th></tr></thead><tbody><tr><td align="center">swap</td><td align="center">类似于windows的虚拟内存文件</td></tr><tr><td align="center">/</td><td align="center">根目录，根目录下最好只有目录，文件放在目录下，不要放在根目录中。</td></tr><tr><td align="center">/boot</td><td align="center">包括操作系统的内核和启动过程需要用的文件</td></tr><tr><td align="center">/root</td><td align="center">超级管理员的家目录</td></tr><tr><td align="center">/home</td><td align="center">家目录，用来存放用户文件</td></tr><tr><td align="center">/etc</td><td align="center">大部分的配置文件默认都放在这里</td></tr><tr><td align="center">/dev</td><td align="center">Linux系统中，所有的硬件都以文件的形式放在这个目录中</td></tr><tr><td align="center">/lost+found</td><td align="center">突然停电或者非正常关机，存放临时文件</td></tr><tr><td align="center">/sbin</td><td align="center">管理员才能运行的一些程序</td></tr><tr><td align="center">/opt</td><td align="center">存储第三方软件的目录</td></tr><tr><td align="center">/proc</td><td align="center">存储进程相关的信息，用于方便的访问进程信息，伪文件系统，所有的内容都存储在内存中</td></tr><tr><td align="center">/mnt</td><td align="center">一般我们将手动挂载的分区放在这里（例如新加一款硬盘，可以挂载在这里）</td></tr><tr><td align="center">/media</td><td align="center">系统自动挂载的分区放在这里</td></tr><tr><td align="center">/lib</td><td align="center">用于存放库文件</td></tr><tr><td align="center">/usr</td><td align="center"></td></tr><tr><td align="center">/usr/lib</td><td align="center">同/lib</td></tr><tr><td align="center">/usr/sbin</td><td align="center">同/sbin</td></tr><tr><td align="center">/usr/local/bin</td><td align="center">系统实用程序</td></tr><tr><td align="center">/usr/local/sbin</td><td align="center">同/sbin</td></tr><tr><td align="center">/usr/local/lib</td><td align="center">同/lib</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> L i n u x </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux分区 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Linux(deepin-uos)系统安装后无法使用无线网问题解决</title>
       <link href="/2020/05/16/Linux(deepin-uos)%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
       <url>/2020/05/16/Linux(deepin-uos)%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
@@ -133,6 +108,31 @@
         <tags>
             
             <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux系统分区方案</title>
+      <link href="/2020/05/16/Linux%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%96%B9%E6%A1%88/"/>
+      <url>/2020/05/16/Linux%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%96%B9%E6%A1%88/</url>
+      
+        <content type="html"><![CDATA[<h2 id="简单分区方案"><a href="#简单分区方案" class="headerlink" title="简单分区方案"></a>简单分区方案</h2><p>实际上，很多时候我们只需要分两个区：<code>/</code>和交换分区，日常使用基本不会有任何影响，甚至于交换分区对于现在的电脑来说都不是必要的，我们完全可以只分配一个根分区。linux只需要一个/根分区就可以正常运行。</p><h2 id="常用分区方案"><a href="#常用分区方案" class="headerlink" title="常用分区方案"></a>常用分区方案</h2><p>以使用 <strong>100G 空间</strong> 安装 linux 为例，各目录含义，请参考文章结尾附录。</p><table><thead><tr><th align="center">目录类型</th><th align="center">挂载点</th><th align="center">分区格式</th><th align="center">大小</th></tr></thead><tbody><tr><td align="center">根目录</td><td align="center">/</td><td align="center">ext4</td><td align="center">20-40G</td></tr><tr><td align="center">家目录</td><td align="center">/home</td><td align="center">ext4</td><td align="center">剩余所有空间</td></tr><tr><td align="center">交换分区</td><td align="center">swap</td><td align="center">无</td><td align="center">2G</td></tr></tbody></table><p><strong><font color=red>注意：</font></strong> 交换分区 无挂载点 分区格式选择交换分区（swap） 最大不建议超过真实内存大小，除非内存小于2G，你的内存大于4G，推荐2G即可，没必要有些人推荐的与内存相当。</p><h2 id="DIY分区方案"><a href="#DIY分区方案" class="headerlink" title="DIY分区方案"></a>DIY分区方案</h2><p>更高级的分区，我们就要了解一下自己电脑的使用场景。</p><p>linux的整体目录就是一个树状结构，根据文章结尾的附录一，我们会知道/分区下的各个目录存放的内容都是不一样的，所以他们的内容变化速度也会不一样。</p><p>了解了这些，试想一个场景，如果我们只分配一个/分区，内容增加速度快的目录，比如个人桌面系统的/home，服务器的/var目录可能会迅速占领大部分的存储容量，以至于当存储容量用尽时出现电脑无法开机的现象。</p><p>为了避免出现这样的情形，我们可以给电脑分区，然后将分区‘挂载’到根分区的指定目录，限制目录的大小，同时保护一些重要目录，比如/boot，这样，即便目录某个目录扩张很快，最终也只会占用我们分配的大小，不会影响到电脑的正常运行。所以第二种方法里，我们把/boot和/home单独分了出来，避免/分区的内容扩张影响到系统启动，同时，分配/home分区可以在电脑系统崩溃，重装系统时避免个人文件丢失，直接将分区挂载上去，个人的数据就不会丢失。</p><p>但是有的时候，我们要安装linux是给服务器安装的，这时，/home就不应该分配这么多空间了，因为对于个人电脑桌面系统，我们可能需要安装很多的软件、文件和视频音乐等，会导致/home目录变得十分臃肿，而其他目录相对来说比较小。不过对于服务器来说，更占用存储的地方可能集中在了/var目录，比如日志文件，比如web服务器的根目录，一般都在/var目录中，这时，我们就应该给/var目录分配更多的空间，保证服务器的正常运行。当然，如果你的服务器目录结构是自己组织的，你就要按照你自己电脑的情况来分析你的电脑该如何来选择分区。</p><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><table><thead><tr><th align="center">目录名</th><th align="center">简介</th></tr></thead><tbody><tr><td align="center">swap</td><td align="center">类似于windows的虚拟内存文件</td></tr><tr><td align="center">/</td><td align="center">根目录，根目录下最好只有目录，文件放在目录下，不要放在根目录中。</td></tr><tr><td align="center">/boot</td><td align="center">包括操作系统的内核和启动过程需要用的文件</td></tr><tr><td align="center">/root</td><td align="center">超级管理员的家目录</td></tr><tr><td align="center">/home</td><td align="center">家目录，用来存放用户文件</td></tr><tr><td align="center">/etc</td><td align="center">大部分的配置文件默认都放在这里</td></tr><tr><td align="center">/dev</td><td align="center">Linux系统中，所有的硬件都以文件的形式放在这个目录中</td></tr><tr><td align="center">/lost+found</td><td align="center">突然停电或者非正常关机，存放临时文件</td></tr><tr><td align="center">/sbin</td><td align="center">管理员才能运行的一些程序</td></tr><tr><td align="center">/opt</td><td align="center">存储第三方软件的目录</td></tr><tr><td align="center">/proc</td><td align="center">存储进程相关的信息，用于方便的访问进程信息，伪文件系统，所有的内容都存储在内存中</td></tr><tr><td align="center">/mnt</td><td align="center">一般我们将手动挂载的分区放在这里（例如新加一款硬盘，可以挂载在这里）</td></tr><tr><td align="center">/media</td><td align="center">系统自动挂载的分区放在这里</td></tr><tr><td align="center">/lib</td><td align="center">用于存放库文件</td></tr><tr><td align="center">/usr</td><td align="center"></td></tr><tr><td align="center">/usr/lib</td><td align="center">同/lib</td></tr><tr><td align="center">/usr/sbin</td><td align="center">同/sbin</td></tr><tr><td align="center">/usr/local/bin</td><td align="center">系统实用程序</td></tr><tr><td align="center">/usr/local/sbin</td><td align="center">同/sbin</td></tr><tr><td align="center">/usr/local/lib</td><td align="center">同/lib</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> L i n u x </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux分区 </tag>
             
         </tags>
       
