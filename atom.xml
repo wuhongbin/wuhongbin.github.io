@@ -434,6 +434,34 @@
   </entry>
   
   <entry>
+    <title>图的基本概念 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/01/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/01/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-01T02:10:43.000Z</published>
+    <updated>2020-07-22T07:25:44.045Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h1><p>图（Graph）是由顶点 (Vertex) 的 <strong>有穷非空</strong> 集合 和 顶点之间 <strong>边</strong> 的集合组成，通常表示为：G(V, E)  , 其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。</p><p>|V|表示图G中顶点的个数，也称为图G的阶；|E| 表示图G中边的条数</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7UjGF.png" alt=""></p><blockquote><p>V = {A，B，C，D，E}         |V| = 5</p><p>E = {(A, B), (A, C), (A, E), (B, C), (C, D), (C, E)}      |E| = 6</p></blockquote><p><strong><font color=red>注意：</font></strong>线性表，树都可以为空，但图 <strong>不能为空</strong> (顶点集合V要有穷非空，边集可以是空的)</p><h1 id="图的其它基本概念"><a href="#图的其它基本概念" class="headerlink" title="图的其它基本概念"></a>图的其它基本概念</h1><h2 id="无向图-amp-有向图"><a href="#无向图-amp-有向图" class="headerlink" title="无向图 &amp; 有向图"></a>无向图 &amp; 有向图</h2><p><strong>无向边：</strong>若顶点Vi到Vj之间的边没有方向，则称 这条边为<strong>无向边(Edge)</strong>，用无序偶(Vi，Vj）来表 示。</p><p><strong>有向边：</strong>若从顶点Vi到Vj的边有方向，则称这条边为 <strong>有向边</strong>，也称为 <strong>弧（Arc）</strong>，用有序偶&lt;Vi，Vj&gt;来表示 ，Vi称为<strong>弧尾</strong>，Vj称为<strong>弧头</strong>。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7s4uF.png" alt=""></p><h2 id="简单图-amp-多重图"><a href="#简单图-amp-多重图" class="headerlink" title="简单图 &amp; 多重图"></a>简单图 &amp; 多重图</h2><p><strong>简单图：</strong>在图结构中，若不存在顶点到其自身的 边，且同一条边不重复出现，则称这样的图为简单图。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7sfjU.png" alt=""></p><h2 id="完全图"><a href="#完全图" class="headerlink" title="完全图"></a>完全图</h2><p><strong>无向完全图：</strong>在无向图中，如果任意两个顶点之间都存在边，则称该图为无向完全图。含有n个顶 点的无向完全图有n*(n-1)/2条边。</p><p><strong>有向完全图：</strong>在有向图中，如果任意两个顶点之间都存在方向互为相反的两条弧，则称该图为有向完全图。含有n个顶点的有向完全图有n*(n-1) 条边。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7R4u6.png" alt=""></p><h2 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h2><p>设有两个图G =（V，E) 和 G’ =（V’，E‘），若V’是V的子集，且E‘是E的子集， 则称G’为G的 <strong>子图</strong>，且若V（G）= V（G’）则称 G’ 为 G的 <strong>生成子图</strong></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH99dU.png" alt=""></p><blockquote><p><strong>生成子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9CoF.png" alt=""></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9ii4.png" alt=""></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHpzLV.png" alt=""></p><blockquote><p><strong>不是子图</strong>，因为它就不是图</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9pZT.png" alt=""></p><h2 id="连通图-amp-强连通图"><a href="#连通图-amp-强连通图" class="headerlink" title="连通图 &amp; 强连通图"></a>连通图 &amp; 强连通图</h2><p><strong>连通图：</strong>在无向图G中，如果从顶点V1到顶点V2有路径， 则称V1和V2是连通的，如果对于图中任意两个顶 点Vi和Vj都是连通的，则称G是连通图 (ConnectedGraph)</p><p><strong>连通分量：</strong>无向图中的极大连通子图称为连通分量。 </p><blockquote><p><strong>注意以下概念：</strong> </p><p>首先要是子图，并且子图是要连通的； </p><p>连通子图含有极大顶点数； </p><p>是有极大顶点数的速通子图包含依附于这些顶点的所 有边。</p></blockquote><p><strong>强连通图：</strong>在有向图G中,如果对于每一对Vi到Vj都存在路径,则 称G是强连通图。 </p><p><strong>强连通分量：</strong>有向图中的极大强连通子图称为有向图的强连通分量。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHElH1.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHE3Ax.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHVTeA.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHeENt.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHeV4P.png" alt=""></p><blockquote><p><strong><font color=red>结论：</font></strong></p><p>如果原图是一个连通图 (强连通图)，那么它的连通分量 (强连通分量) 与 原图  <strong>一模一样</strong></p><p>如果原图不是一个连通图 (强连通图)，那么它的连通分量 (强连通分量) 会有 <strong>许多个</strong></p></blockquote><h2 id="生成树-amp-生成森林"><a href="#生成树-amp-生成森林" class="headerlink" title="生成树 &amp; 生成森林"></a>生成树 &amp; 生成森林</h2><p><strong>生成树：</strong>连通图包含全部顶点的一个极小连通子图</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHK1MT.png" alt=""></p><p><strong>生成森林：</strong>非连通图所有连通分量的生成树组成森林</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHKqFs.png" alt=""></p><h2 id="稀疏图-amp-稠密图"><a href="#稀疏图-amp-稠密图" class="headerlink" title="稀疏图 &amp; 稠密图"></a>稀疏图 &amp; 稠密图</h2><p><strong>稀疏图和稠密图：</strong>这里的稀疏和稠密是模糊的概念，都 是相对而言的，通常认为边或弧数小于n*logn(n是顶 点的个数）的图称为稀疏图，反之称为稠密图。 </p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHQXrT.png" alt=""></p><h2 id="顶点的度"><a href="#顶点的度" class="headerlink" title="顶点的度"></a>顶点的度</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHM6XT.png" alt=""><br><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHMgnU.png" alt=""></p><h2 id="权-amp-网"><a href="#权-amp-网" class="headerlink" title="权 &amp; 网"></a>权 &amp; 网</h2><p><strong>权和网：</strong>有些图的边或弧带有与宅相关的数字，这种与图的边或 弧相关的数叫做权(Weight)，带权的图通常称为网 (Network)。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHQeCn.png" alt=""></p><h2 id="有向树"><a href="#有向树" class="headerlink" title="有向树"></a>有向树</h2><p><strong>有向树：</strong> 一个顶点的入度为0，其余顶点的入度均为1的有向图</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHlRY9.png" alt=""></p><h2 id="路径-amp-路径长度-amp-回路"><a href="#路径-amp-路径长度-amp-回路" class="headerlink" title="路径 &amp; 路径长度 &amp; 回路"></a>路径 &amp; 路径长度 &amp; 回路</h2><p><strong>路径：</strong>图中顶点v到顶点w的顶点序列，序列中顶点不重复的路径称为简单路径。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH1Tcq.png" alt=""></p><p><strong>路径长度：</strong>路径上边的数目，若该路径最短则称其为距离。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH3N2n.png" alt=""></p><p><strong>回路：</strong>第一个顶点和最后一个顶点相同的路径</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH3jqf.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;图的定义&quot;&gt;&lt;a href=&quot;#图的定义&quot; class=&quot;headerlink&quot; title=&quot;图的定义&quot;&gt;&lt;/a&gt;图的定义&lt;/h1&gt;&lt;p&gt;图（Graph）是由顶点 (Vertex) 的 &lt;strong&gt;有穷非空&lt;/strong&gt; 集合 和 顶点之间 &lt;stron
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="图" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/"/>
+    
+    
+      <category term="图" scheme="https://wuhongbin.github.io/tags/%E5%9B%BE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>哈夫曼树 详细总结</title>
     <link href="https://wuhongbin.github.io/2020/05/20/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
     <id>https://wuhongbin.github.io/2020/05/20/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91-%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
@@ -517,33 +545,6 @@
       <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
       <category term="构造二叉树" scheme="https://wuhongbin.github.io/tags/%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux(deepin-uos)系统安装后无法使用无线网问题解决</title>
-    <link href="https://wuhongbin.github.io/2020/05/16/Linux(deepin-uos)%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
-    <id>https://wuhongbin.github.io/2020/05/16/Linux(deepin-uos)%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</id>
-    <published>2020-05-16T03:10:43.000Z</published>
-    <updated>2020-06-28T08:32:02.314Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人笔记本电脑型号已测试，联想Y7000，安装deepin/uos后，100%遇到此问题。</p><h2 id="问题检查"><a href="#问题检查" class="headerlink" title="问题检查"></a>问题检查</h2><p><strong>驱动问题</strong></p><p>如果通过命令<code>ifconfig</code>没能发现类似<code>wlp7s0</code>的无线网络，可以判断是这个问题。</p><p><strong>无线网卡被hard blocked的问题</strong></p><p>运行命令<code>rfkill list all</code>，出现如下结果</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">0:ideapad_wlan: Wireless LAN </span><br><span class="line">Soft blocked: no </span><br><span class="line">Hard blocked:yes </span><br><span class="line">1:ideapad_bluetooth: Bluetooth </span><br><span class="line">Soft blocked: no </span><br><span class="line">Hard blocked: yes </span><br><span class="line">2:phy0: Wireless LAN </span><br><span class="line">Soft blocked: no </span><br><span class="line">Hard blocked:no </span><br><span class="line">3:hci0: Bluetooth </span><br><span class="line">Soft blocked: yes </span><br><span class="line">Hard blocked: no</span><br></pre></td></tr></table></figure><p>可以看到，优先级前的ideapad_wlan的Hard blocked 默认为yes，即deepin默认关闭了硬件wifi开关，而联想拯救者Y7000的wifi只有软件开关，没有硬件开关的启动，所以引起了wifi无法开启的问题。</p><p><strong>网卡驱动的电源管理问题</strong></p><p>使用命令<code>dmesg</code>查看日志，如果出现</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/16/Y68IZ8.png" alt=""></p><p>那很可能就是这个问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><strong>驱动问题解决方案：</strong></p><p>如果确认是驱动问题，则可以尝试通过重装驱动解决：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install --reinstall firmware-realtek</span><br></pre></td></tr></table></figure><p><strong>无线网卡被hard blocked解决方案：</strong></p><p>禁用 *<em>ideapad_laptop *</em>驱动</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;blacklist ideapad_laptop&quot; | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;backlist-ideapad.conf</span><br></pre></td></tr></table></figure><p><strong>网卡驱动的电源管理问题解决方案：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;options r8822be aspm&#x3D;0&quot; | sudo tee &#x2F;etc&#x2F;modprobe.d&#x2F;r8822be.conf</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本人笔记本电脑型号已测试，联想Y7000，安装deepin/uos后，100%遇到此问题。&lt;/p&gt;
-&lt;h2 id=&quot;问题检查&quot;&gt;&lt;a hre
-      
-    
-    </summary>
-    
-    
-      <category term="L i n u x" scheme="https://wuhongbin.github.io/categories/L-i-n-u-x/"/>
-    
-    
-      <category term="Linux" scheme="https://wuhongbin.github.io/tags/Linux/"/>
     
   </entry>
   
