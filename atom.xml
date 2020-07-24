@@ -408,11 +408,45 @@
   </entry>
   
   <entry>
+    <title>CTF题解占位</title>
+    <link href="https://wuhongbin.github.io/2020/06/24/CTF%E9%A2%98%E8%A7%A3%E5%8D%A0%E4%BD%8D/"/>
+    <id>https://wuhongbin.github.io/2020/06/24/CTF%E9%A2%98%E8%A7%A3%E5%8D%A0%E4%BD%8D/</id>
+    <published>2020-06-24T09:15:50.000Z</published>
+    <updated>2020-07-24T05:43:35.867Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="题解 CTF" scheme="https://wuhongbin.github.io/categories/%E9%A2%98%E8%A7%A3-CTF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>算法题解占位</title>
+    <link href="https://wuhongbin.github.io/2020/06/24/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3%E5%8D%A0%E4%BD%8D/"/>
+    <id>https://wuhongbin.github.io/2020/06/24/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3%E5%8D%A0%E4%BD%8D/</id>
+    <published>2020-06-24T09:15:50.000Z</published>
+    <updated>2020-07-24T05:42:19.612Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="题解 力扣" scheme="https://wuhongbin.github.io/categories/%E9%A2%98%E8%A7%A3-%E5%8A%9B%E6%89%A3/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>图的存储结构之邻接多重表 详细总结</title>
     <link href="https://wuhongbin.github.io/2020/06/04/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E4%B9%8B%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
     <id>https://wuhongbin.github.io/2020/06/04/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E4%B9%8B%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
     <published>2020-06-04T09:15:50.000Z</published>
-    <updated>2020-07-23T09:38:37.427Z</updated>
+    <updated>2020-07-23T12:06:49.899Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​        如果我们在无向图的应用中,关注的重点是顶点的话,那么邻接表是不错的选择,但如果我们更关注的是边的操作,比如对已经访问过的边做标记, 或者删除某一条边等操作,邻接表就显得不那么方便了。</p><h2 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h2><p><strong>邻接多重表：</strong> 无向图的一种存储结构</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/UOkyiq.png" alt=""></p><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/UOk6J0.png" alt=""></p><h2 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span>&#123;</span><span class="comment">//边表结点</span></span><br><span class="line">    <span class="keyword">int</span> ivex,jvex; </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">ilink</span>, *<span class="title">jlink</span>;</span></span><br><span class="line">    <span class="comment">//Inforype info;</span></span><br><span class="line">    <span class="comment">//bool mark;</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span>&#123;</span><span class="comment">//顶点结点</span></span><br><span class="line">    VertexType data;</span><br><span class="line">    ArcNode *firstedge;</span><br><span class="line">&#125;VNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//邻接多重表</span></span><br><span class="line">    VNode adjmulist[MaxVertexNum];</span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;</span><br><span class="line">&#125;AMLGraph；</span><br></pre></td></tr></table></figure><h2 id="十字链表-VS-邻接多重表"><a href="#十字链表-VS-邻接多重表" class="headerlink" title="十字链表 VS 邻接多重表"></a>十字链表 VS 邻接多重表</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/UOVeGq.png" alt=""></p>]]></content>
     
@@ -494,64 +528,6 @@
       <category term="图" scheme="https://wuhongbin.github.io/tags/%E5%9B%BE/"/>
     
       <category term="邻接表" scheme="https://wuhongbin.github.io/tags/%E9%82%BB%E6%8E%A5%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图的存储结构之邻接矩阵 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/06/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E4%B9%8B%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/06/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E4%B9%8B%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-06-02T02:15:43.000Z</published>
-    <updated>2020-07-23T05:22:37.259Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="邻接矩阵的定义"><a href="#邻接矩阵的定义" class="headerlink" title="邻接矩阵的定义"></a>邻接矩阵的定义</h2><p><strong>图的邻接矩阵（Adjacency Matrix）</strong>存储方式是用两个数组来表示图。一个 <strong>一维数组 *<em>存储图中顶点信息，一个 *</em>二维数组</strong>(称为邻接矩阵) 存储图中的边或弧的信息。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/Ub3rkD.png" alt=""></p><h2 id="图的领接矩阵实现思路"><a href="#图的领接矩阵实现思路" class="headerlink" title="图的领接矩阵实现思路"></a>图的领接矩阵实现思路</h2><p>结点数为n的图G=(V)的邻接矩阵A是nxn的。 </p><p>将G的顶点编号为V1,V2…Vn(数组下标) </p><p>若&lt;Vi,Vj&gt; ∈E，则 A [i] [j] = 1，否则 A [i] [j] = 0</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/Ub8n4e.png" alt=""></p><h3 id="实例（有向图）"><a href="#实例（有向图）" class="headerlink" title="实例（有向图）"></a>实例（有向图）</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UbNmpF.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UbNnl4.png" alt=""></p><h3 id="实例（无向图）"><a href="#实例（无向图）" class="headerlink" title="实例（无向图）"></a>实例（无向图）</h3><p><strong><font color=red>注意：</font></strong> 下图中修改部分的值均为 <strong>1</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UbdSSO.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UbdplD.png" alt=""></p><h2 id="网的邻接矩阵实现思路"><a href="#网的邻接矩阵实现思路" class="headerlink" title="网的邻接矩阵实现思路"></a>网的邻接矩阵实现思路</h2><blockquote><p><strong>小提示：</strong>网也就是带权值的图</p></blockquote><p>结点数为n的图G=(V)的邻接矩阵A是nxn的。 </p><p>将G的顶点编号为V1,V2…Vn(数组下标) </p><p>若&lt;Vi,Vj&gt; ∈E，则 A [i] [j] = Wi,j，否则 A [i] [j] = ∞</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/Ub5cXd.png" alt=""></p><h3 id="实例（无向图）-1"><a href="#实例（无向图）-1" class="headerlink" title="实例（无向图）"></a>实例（无向图）</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/Uqy1XV.png" alt=""></p><h3 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> EdgeType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    VertexType Vex[MaxVertexNum];<span class="comment">//点集</span></span><br><span class="line">    EdgeType Edge[MaxVertexNum][MaxVertexNum];<span class="comment">//边集</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;<span class="comment">//结点数量，边的数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="邻接矩阵的性质"><a href="#邻接矩阵的性质" class="headerlink" title="邻接矩阵的性质"></a>邻接矩阵的性质</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/Uqy1XV.png" alt=""></p><ol><li><p>邻接矩阵法的空间复杂为O(n2), 适用于 <strong>稠密图</strong></p></li><li><p>无向图的邻接矩阵为 <strong>对称矩阵</strong> </p></li><li><p>无向图中第 i 行 (第 i 列) 非0元素 (非正无穷) 的个数为第 i 个顶点的度 </p></li><li><p>有向图中第 i 行 (第 i 列) 非0元素 (非正无穷) 的个数为第 i 个顶点的出度(入度）</p></li></ol><h2 id="问题探索"><a href="#问题探索" class="headerlink" title="问题探索"></a>问题探索</h2><blockquote><p><strong>问题：</strong>设图G的邻接矩阵为A,矩阵运算 <strong>A的n次</strong> 的含义？？？</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/23/Uq5RZn.png" alt=""></p><p><strong><font color=red>小提示：</font></strong> 以下 An 代表 A的n次，例如 A2 代表 A的2次</p><p><strong><font color=red>分析：</font></strong></p><p>A2 [2] [5]=1 * 1 + 0 * 0 + 1 * 1 + 0 * 0 + 0 * 0 = 2 </p><p>A2 [2] [5] = 2 表示从顶点v2到顶点v5长度为2的路径有 2 条</p><p>A3 [2] [5] = 0 * 1 + 0 * 0 + 1 * 1 + 1 * 0 + 2 * 0 = 1 </p><p>A2 [2] [3] = 1 表示从顶点v2到顶点v3长度为2的路径有 1 条 </p><p>A3 [2] [5] = 1 表示从顶点v2到顶点v5长度为3的路径有 1 条 </p><p><strong><font color=red>结论：</font></strong></p><p>An [i] [j] = x 表示从顶点Vi到顶点Vj长度为n的路径有 x 条</p><p>即：An [i] [j] 表示从顶点Vi到顶点Vj长度为n的路径条数</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;邻接矩阵的定义&quot;&gt;&lt;a href=&quot;#邻接矩阵的定义&quot; class=&quot;headerlink&quot; title=&quot;邻接矩阵的定义&quot;&gt;&lt;/a&gt;邻接矩阵的定义&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;图的邻接矩阵（Adjacency Matrix）&lt;/strong&gt;存储方式是用两个数
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="图" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/"/>
-    
-    
-      <category term="图" scheme="https://wuhongbin.github.io/tags/%E5%9B%BE/"/>
-    
-      <category term="邻接矩阵" scheme="https://wuhongbin.github.io/tags/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图的基本概念 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/06/01/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/06/01/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-06-01T02:10:43.000Z</published>
-    <updated>2020-07-22T09:06:04.991Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h1><p>图（Graph）是由顶点 (Vertex) 的 <strong>有穷非空</strong> 集合 和 顶点之间 <strong>边</strong> 的集合组成，通常表示为：G(V, E)  , 其中，G表示一个图，V是图G中顶点的集合，E是图G中边的集合。</p><p>|V|表示图G中顶点的个数，也称为图G的阶；|E| 表示图G中边的条数</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7UjGF.png" alt=""></p><blockquote><p>V = {A，B，C，D，E}         |V| = 5</p><p>E = {(A, B), (A, C), (A, E), (B, C), (C, D), (C, E)}      |E| = 6</p></blockquote><p><strong><font color=red>注意：</font></strong>线性表，树都可以为空，但图 <strong>不能为空</strong> (顶点集合V要有穷非空，边集可以是空的)</p><h1 id="图的其它基本概念"><a href="#图的其它基本概念" class="headerlink" title="图的其它基本概念"></a>图的其它基本概念</h1><h2 id="无向图-amp-有向图"><a href="#无向图-amp-有向图" class="headerlink" title="无向图 &amp; 有向图"></a>无向图 &amp; 有向图</h2><p><strong>无向边：</strong>若顶点Vi到Vj之间的边没有方向，则称 这条边为<strong>无向边(Edge)</strong>，用无序偶(Vi，Vj）来表 示。</p><p><strong>有向边：</strong>若从顶点Vi到Vj的边有方向，则称这条边为 <strong>有向边</strong>，也称为 <strong>弧（Arc）</strong>，用有序偶&lt;Vi，Vj&gt;来表示 ，Vi称为<strong>弧尾</strong>，Vj称为<strong>弧头</strong>。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7s4uF.png" alt=""></p><h2 id="简单图-amp-多重图"><a href="#简单图-amp-多重图" class="headerlink" title="简单图 &amp; 多重图"></a>简单图 &amp; 多重图</h2><p><strong>简单图：</strong>在图结构中，若不存在顶点到其自身的 边，且同一条边不重复出现，则称这样的图为简单图。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7sfjU.png" alt=""></p><h2 id="完全图"><a href="#完全图" class="headerlink" title="完全图"></a>完全图</h2><p><strong>无向完全图：</strong>在无向图中，如果任意两个顶点之间都存在边，则称该图为无向完全图。含有n个顶 点的无向完全图有n*(n-1)/2条边。</p><p><strong>有向完全图：</strong>在有向图中，如果任意两个顶点之间都存在方向互为相反的两条弧，则称该图为有向完全图。含有n个顶点的有向完全图有n*(n-1) 条边。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/U7R4u6.png" alt=""></p><h2 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h2><p>设有两个图G =（V，E) 和 G’ =（V’，E‘），若V’是V的子集，且E‘是E的子集， 则称G’为G的 <strong>子图</strong>，且若V（G）= V（G’）则称 G’ 为 G的 <strong>生成子图</strong></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH99dU.png" alt=""></p><blockquote><p><strong>生成子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9CoF.png" alt=""></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9ii4.png" alt=""></p><blockquote><p><strong>子图</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHpzLV.png" alt=""></p><blockquote><p><strong>不是子图</strong>，因为它就不是图</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH9pZT.png" alt=""></p><h2 id="连通图-amp-强连通图"><a href="#连通图-amp-强连通图" class="headerlink" title="连通图 &amp; 强连通图"></a>连通图 &amp; 强连通图</h2><p><strong>连通图：</strong>在无向图G中，如果从顶点V1到顶点V2有路径， 则称V1和V2是连通的，如果对于图中任意两个顶 点Vi和Vj都是连通的，则称G是连通图 (ConnectedGraph)</p><p><strong>连通分量：</strong>无向图中的极大连通子图称为连通分量。 </p><blockquote><p><strong>注意以下概念：</strong> </p><p>首先要是子图，并且子图是要连通的； </p><p>连通子图含有极大顶点数； </p><p>是有极大顶点数的速通子图包含依附于这些顶点的所 有边。</p></blockquote><p><strong>强连通图：</strong>在有向图G中,如果对于每一对Vi到Vj都存在路径,则 称G是强连通图。 </p><p><strong>强连通分量：</strong>有向图中的极大强连通子图称为有向图的强连通分量。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHElH1.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHE3Ax.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHVTeA.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHeENt.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHeV4P.png" alt=""></p><blockquote><p><strong><font color=red>结论：</font></strong></p><p>如果原图是一个连通图 (强连通图)，那么它的连通分量 (强连通分量) 与 原图  <strong>一模一样</strong></p><p>如果原图不是一个连通图 (强连通图)，那么它的连通分量 (强连通分量) 会有 <strong>许多个</strong></p></blockquote><h2 id="生成树-amp-生成森林"><a href="#生成树-amp-生成森林" class="headerlink" title="生成树 &amp; 生成森林"></a>生成树 &amp; 生成森林</h2><p><strong>生成树：</strong>连通图包含全部顶点的一个极小连通子图</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHK1MT.png" alt=""></p><p><strong>生成森林：</strong>非连通图所有连通分量的生成树组成森林</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHKqFs.png" alt=""></p><h2 id="稀疏图-amp-稠密图"><a href="#稀疏图-amp-稠密图" class="headerlink" title="稀疏图 &amp; 稠密图"></a>稀疏图 &amp; 稠密图</h2><p><strong>稀疏图和稠密图：</strong>这里的稀疏和稠密是模糊的概念，都 是相对而言的，通常认为边或弧数小于n*logn(n是顶 点的个数）的图称为稀疏图，反之称为稠密图。 </p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHQXrT.png" alt=""></p><h2 id="顶点的度"><a href="#顶点的度" class="headerlink" title="顶点的度"></a>顶点的度</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHM6XT.png" alt=""><br><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHMgnU.png" alt=""></p><h2 id="权-amp-网"><a href="#权-amp-网" class="headerlink" title="权 &amp; 网"></a>权 &amp; 网</h2><p><strong>权和网：</strong>有些图的边或弧带有与宅相关的数字，这种与图的边或 弧相关的数叫做权(Weight)，带权的图通常称为网 (Network)。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHQeCn.png" alt=""></p><h2 id="有向树"><a href="#有向树" class="headerlink" title="有向树"></a>有向树</h2><p><strong>有向树：</strong> 一个顶点的入度为0，其余顶点的入度均为1的有向图</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UHlRY9.png" alt=""></p><h2 id="路径-amp-路径长度-amp-回路"><a href="#路径-amp-路径长度-amp-回路" class="headerlink" title="路径 &amp; 路径长度 &amp; 回路"></a>路径 &amp; 路径长度 &amp; 回路</h2><p><strong>路径：</strong>图中顶点v到顶点w的顶点序列，序列中顶点不重复的路径称为简单路径。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH1Tcq.png" alt=""></p><p><strong>路径长度：</strong>路径上边的数目，若该路径最短则称其为距离。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH3N2n.png" alt=""></p><p><strong>回路：</strong>第一个顶点和最后一个顶点相同的路径</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/22/UH3jqf.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;图的定义&quot;&gt;&lt;a href=&quot;#图的定义&quot; class=&quot;headerlink&quot; title=&quot;图的定义&quot;&gt;&lt;/a&gt;图的定义&lt;/h1&gt;&lt;p&gt;图（Graph）是由顶点 (Vertex) 的 &lt;strong&gt;有穷非空&lt;/strong&gt; 集合 和 顶点之间 &lt;stron
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="图" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/"/>
-    
-    
-      <category term="图" scheme="https://wuhongbin.github.io/tags/%E5%9B%BE/"/>
     
   </entry>
   
