@@ -4,6 +4,75 @@
   
     
     <entry>
+      <title>查找之折半(二分)查找 详细总结</title>
+      <link href="/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+      <url>/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><strong>折半查找：</strong>又称二分查找，仅适用于 <strong>有序的顺序表</strong></p><h1 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h1><ol><li><p>首先将给定值key与表中中间位置元素的关键字比较,  </p></li><li><p>若相等,则返回该元素的位置;  </p></li><li><p>若不等,则在前半部分或者是后半部分进行查找。 </p></li></ol><blockquote><p>查找序列升序时,  </p><p>若key小于中间元素,则查找前半部分  </p><p>若key大于中间元素,则查找后半部分。  </p></blockquote><ol start="4"><li>重复该过程,直到找到查找的元素为止;或查找失败。</li></ol><h1 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Binary_Search</span><span class="params">(SeqList L, ElemType key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> low=<span class="number">0</span>, high=L.TableLen<span class="number">-1</span>, mid;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">    &#123;</span><br><span class="line">    mid = (low + high)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(L.elem[mid] == key)  </span><br><span class="line">    <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(L.elem[mid] &gt; key)</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">            Low = mid + <span class="number">1</span>;        </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>折半查找的时间复杂度为 O(log2n)</strong></p></blockquote><h1 id="判定树"><a href="#判定树" class="headerlink" title="判定树"></a>判定树</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ0Hc8.png" alt=""></p><blockquote><p>若该判定树是 <strong>满二叉树</strong> 时，</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ0xNn.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQBkB4.png" alt=""></p></blockquote><blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQB3HH.png" alt=""></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法笔记 </category>
+          
+          <category> 查找 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>查找之顺序(线性)查找 详细总结</title>
+      <link href="/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+      <url>/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><strong>顺序查找：</strong>又称线性查找，主要用于在<strong>线性表</strong>中进行查找。</p><h1 id="无序线性表的顺序查找"><a href="#无序线性表的顺序查找" class="headerlink" title="无序线性表的顺序查找"></a>无序线性表的顺序查找</h1><h2 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQMvkQ.png" alt=""></p><blockquote><p>对无序线性表进行顺序查找，查找失败时要 <strong>遍历整个线性表</strong></p></blockquote><h2 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">        ElemType *elem;</span><br><span class="line">        <span class="keyword">int</span> TableLen;</span><br><span class="line">&#125;SSTable;<span class="comment">//查找表</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search_Seg</span><span class="params">(SStable ST,ElemType key)</span></span>&#123;</span><br><span class="line">        ST.elem[<span class="number">0</span>] = key; <span class="comment">//哨兵</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ST.Tablelen; ST.elem[i] != key; i--);</span><br><span class="line">        <span class="keyword">return</span> i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>哨兵作用：</strong> 查找失败返回哨兵下标即0，查找成功返回查找到的元素下标。如果没有哨兵，则需要加一个if判断，是否查找到指定元素。<strong>使用哨兵可以精简代码量。</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ1msx.png" alt=""></p><h1 id="有序线性表的顺序查找"><a href="#有序线性表的顺序查找" class="headerlink" title="有序线性表的顺序查找"></a>有序线性表的顺序查找</h1><h2 id="实例分析-1"><a href="#实例分析-1" class="headerlink" title="实例分析"></a>实例分析</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ1aef.png" alt=""></p><blockquote><p>对关键字有序线性表进行顺序查找，查找失败时 <strong>不一定要遍历整个线性表</strong></p></blockquote><h2 id="判定树"><a href="#判定树" class="headerlink" title="判定树"></a>判定树</h2><p><strong>判定树：</strong> 描述查找过程的二叉排序树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQG5tS.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQGbXn.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法笔记 </category>
+          
+          <category> 查找 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 顺序查找 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>查找的基本概念 详细总结</title>
+      <link href="/2020/06/11/%E6%9F%A5%E6%89%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+      <url>/2020/06/11/%E6%9F%A5%E6%89%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQVP9f.png" alt=""></p><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><blockquote><p><strong>查找：</strong>在数据集合中寻找满足某种条件的数据元素的过程。 </p><p>查找结果分为 <strong>查找成功</strong> 和 <strong>查找失败</strong>。</p></blockquote><blockquote><p>*<em>查找表:  *</em>用于查找的数据集合, 由同一种数据类型(或记录)的组成, 可以是一个数组或链表等数据类型  </p><p>操作:    </p><ol><li>检索满足条件的某个特定的数据元素的各种属性</li><li>查询某个特定的数据元素是否在查找表中    </li><li>在查找表中插入一个数据元素  </li><li>从查找表中删除一个数据元素</li></ol><p>操作1和2合起来称作 <strong>静态查找表</strong> , 全部操作合起来称作 <strong>动态查找表</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQAdd1.png" alt=""></p><blockquote><p>*<em>关键字:  *</em> 数据元素中唯一标识该元素的某个数据项的值, 使用基于关键字的查找, 查找结果应该是唯一的。</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQAwIx.png" alt=""></p><blockquote><p><strong>平均查找长度：</strong>  查找时,关键字比较次数的平均值:</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQkcEq.png" alt=""></p><p>一般用于衡量一个查找算法的<strong>查找效率</strong></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法笔记 </category>
+          
+          <category> 查找 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图的应用之关键路径 详细总结</title>
       <link href="/2020/06/10/%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8%E4%B9%8B%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
       <url>/2020/06/10/%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8%E4%B9%8B%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</url>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wuhongbin.github.io/"/>
-  <updated>2020-07-30T10:37:55.828Z</updated>
+  <updated>2020-07-31T04:59:51.211Z</updated>
   <id>https://wuhongbin.github.io/</id>
   
   <author>
@@ -15,6 +15,88 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>查找之折半(二分)查找 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-11T11:15:50.000Z</published>
+    <updated>2020-07-31T04:59:51.211Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><strong>折半查找：</strong>又称二分查找，仅适用于 <strong>有序的顺序表</strong></p><h1 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h1><ol><li><p>首先将给定值key与表中中间位置元素的关键字比较,  </p></li><li><p>若相等,则返回该元素的位置;  </p></li><li><p>若不等,则在前半部分或者是后半部分进行查找。 </p></li></ol><blockquote><p>查找序列升序时,  </p><p>若key小于中间元素,则查找前半部分  </p><p>若key大于中间元素,则查找后半部分。  </p></blockquote><ol start="4"><li>重复该过程,直到找到查找的元素为止;或查找失败。</li></ol><h1 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Binary_Search</span><span class="params">(SeqList L, ElemType key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> low=<span class="number">0</span>, high=L.TableLen<span class="number">-1</span>, mid;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">    &#123;</span><br><span class="line">    mid = (low + high)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(L.elem[mid] == key)  </span><br><span class="line">    <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(L.elem[mid] &gt; key)</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">            Low = mid + <span class="number">1</span>;        </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>折半查找的时间复杂度为 O(log2n)</strong></p></blockquote><h1 id="判定树"><a href="#判定树" class="headerlink" title="判定树"></a>判定树</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ0Hc8.png" alt=""></p><blockquote><p>若该判定树是 <strong>满二叉树</strong> 时，</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ0xNn.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQBkB4.png" alt=""></p></blockquote><blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQB3HH.png" alt=""></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;折半查找：&lt;/strong&gt;又称二分查找，仅适用于 &lt;strong&gt;有序的顺序表&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查找之顺序(线性)查找 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E4%B9%8B%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-11T10:15:50.000Z</published>
+    <updated>2020-07-31T04:34:12.337Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><strong>顺序查找：</strong>又称线性查找，主要用于在<strong>线性表</strong>中进行查找。</p><h1 id="无序线性表的顺序查找"><a href="#无序线性表的顺序查找" class="headerlink" title="无序线性表的顺序查找"></a>无序线性表的顺序查找</h1><h2 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQMvkQ.png" alt=""></p><blockquote><p>对无序线性表进行顺序查找，查找失败时要 <strong>遍历整个线性表</strong></p></blockquote><h2 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">        ElemType *elem;</span><br><span class="line">        <span class="keyword">int</span> TableLen;</span><br><span class="line">&#125;SSTable;<span class="comment">//查找表</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search_Seg</span><span class="params">(SStable ST,ElemType key)</span></span>&#123;</span><br><span class="line">        ST.elem[<span class="number">0</span>] = key; <span class="comment">//哨兵</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ST.Tablelen; ST.elem[i] != key; i--);</span><br><span class="line">        <span class="keyword">return</span> i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>哨兵作用：</strong> 查找失败返回哨兵下标即0，查找成功返回查找到的元素下标。如果没有哨兵，则需要加一个if判断，是否查找到指定元素。<strong>使用哨兵可以精简代码量。</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ1msx.png" alt=""></p><h1 id="有序线性表的顺序查找"><a href="#有序线性表的顺序查找" class="headerlink" title="有序线性表的顺序查找"></a>有序线性表的顺序查找</h1><h2 id="实例分析-1"><a href="#实例分析-1" class="headerlink" title="实例分析"></a>实例分析</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQ1aef.png" alt=""></p><blockquote><p>对关键字有序线性表进行顺序查找，查找失败时 <strong>不一定要遍历整个线性表</strong></p></blockquote><h2 id="判定树"><a href="#判定树" class="headerlink" title="判定树"></a>判定树</h2><p><strong>判定树：</strong> 描述查找过程的二叉排序树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQG5tS.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQGbXn.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;顺序查找：&lt;/strong&gt;又称线性查找，主要用于在&lt;strong&gt;线性表&lt;/strong&gt;中进行查找。&lt;/p&gt;
+&lt;h1 i
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
+    
+    
+      <category term="顺序查找" scheme="https://wuhongbin.github.io/tags/%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查找的基本概念 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/11/%E6%9F%A5%E6%89%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-11T08:15:43.000Z</published>
+    <updated>2020-07-31T04:58:51.837Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQVP9f.png" alt=""></p><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><blockquote><p><strong>查找：</strong>在数据集合中寻找满足某种条件的数据元素的过程。 </p><p>查找结果分为 <strong>查找成功</strong> 和 <strong>查找失败</strong>。</p></blockquote><blockquote><p>*<em>查找表:  *</em>用于查找的数据集合, 由同一种数据类型(或记录)的组成, 可以是一个数组或链表等数据类型  </p><p>操作:    </p><ol><li>检索满足条件的某个特定的数据元素的各种属性</li><li>查询某个特定的数据元素是否在查找表中    </li><li>在查找表中插入一个数据元素  </li><li>从查找表中删除一个数据元素</li></ol><p>操作1和2合起来称作 <strong>静态查找表</strong> , 全部操作合起来称作 <strong>动态查找表</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQAdd1.png" alt=""></p><blockquote><p>*<em>关键字:  *</em> 数据元素中唯一标识该元素的某个数据项的值, 使用基于关键字的查找, 查找结果应该是唯一的。</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQAwIx.png" alt=""></p><blockquote><p><strong>平均查找长度：</strong>  查找时,关键字比较次数的平均值:</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/31/aQkcEq.png" alt=""></p><p>一般用于衡量一个查找算法的<strong>查找效率</strong></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;总览&quot;&gt;&lt;a href=&quot;#总览&quot; class=&quot;headerlink&quot; title=&quot;总览&quot;&gt;&lt;/a&gt;总览&lt;/h1&gt;&lt;p&gt;&lt;img src= &quot;/img/loading.gif&quot; data-src=&quot;https://s1.ax1x.com/2020/07/31/
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>图的应用之关键路径 详细总结</title>
@@ -515,90 +597,6 @@
       <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
       <category term="遍历二叉树" scheme="https://wuhongbin.github.io/tags/%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉树的存储结构 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/05/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/05/26/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-26T09:01:43.000Z</published>
-    <updated>2020-07-30T06:08:15.645Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="二叉树的顺序存储结构"><a href="#二叉树的顺序存储结构" class="headerlink" title="二叉树的顺序存储结构"></a>二叉树的顺序存储结构</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YNQAcq.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YNQEj0.md.png" alt=""></p><h3 id="二叉树顺序存储结构的特点"><a href="#二叉树顺序存储结构的特点" class="headerlink" title="二叉树顺序存储结构的特点"></a>二叉树顺序存储结构的特点</h3><p>① 对于 <strong><font color=red>完全二叉树</font></strong> 来说，期顺序存储是十分合适的。</p><p>② 对于 <strong><font color=red>一般的二叉树</font></strong> ，特别是对于那些单分支节点较多的二叉树来说是很不合适的，因为可能只有少数的存储单元被利用，特别是对退化的二叉树(即每个节点都是单分支的)，空间浪费更是惊人。</p><p>③ 在顺序存储结构中，<strong><font color=red>找一个节点的双亲和孩子都很容易</font></strong>。</p><h2 id="二叉树的链式存储结构"><a href="#二叉树的链式存储结构" class="headerlink" title="二叉树的链式存储结构"></a>二叉树的链式存储结构</h2><p>借鉴 <strong><font color=blue>树的孩子链存储结构</font></strong> → 二叉树的链式存储结构</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在二叉树的链式存储中，节点定义如下</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>*<span class="title">lchild</span>, *<span class="title">rchild</span>;</span>  <span class="comment">//指向的都是二叉树:递归性</span></span><br><span class="line">&#125;BTNode;</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YNGs76.md.png" alt=""></p><h3 id="二叉链存储结构的特点"><a href="#二叉链存储结构的特点" class="headerlink" title="二叉链存储结构的特点"></a>二叉链存储结构的特点</h3><p>① 除了指针外，二叉链  <strong><font color=red>比较节省存储空间</font></strong>。占用的存储空间与树形没有关系，只与树中节点个数有关。</p><p>② 在二叉链中，<strong><font color=red>找一个节点的孩子很容易</font></strong>，但找其双亲不方便。</p><p>一棵树采用孩子兄弟链存储结构表示  →  二叉链</p><h3 id="二叉链中空指针的个数"><a href="#二叉链中空指针的个数" class="headerlink" title="二叉链中空指针的个数"></a>二叉链中空指针的个数</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YNJTM9.md.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;二叉树的顺序存储结构&quot;&gt;&lt;a href=&quot;#二叉树的顺序存储结构&quot; class=&quot;headerlink&quot; title=&quot;二叉树的顺序存储结构&quot;&gt;&lt;/a&gt;二叉树的顺序存储结构&lt;/h2&gt;&lt;p&gt;&lt;img src= &quot;/img/loading.gif&quot; data-src=
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"/>
-    
-    
-      <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉树的概念 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/05/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/05/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-25T02:10:43.000Z</published>
-    <updated>2020-07-30T11:00:38.923Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><p>二叉树是有限的节点集合 （<strong><font color=red>递归定义</font></strong> ）</p><p>① 这个集合或者是空</p><p>② 或者由一个根节点和两颗互不相交的称为  <strong><font color=red>左子树</font></strong> 和 <strong><font color=red>右子树</font></strong> 的二叉树组成。</p><h3 id="二叉树的五种基本形态："><a href="#二叉树的五种基本形态：" class="headerlink" title="二叉树的五种基本形态："></a><strong><font color=blue>二叉树的五种基本形态：</font></strong></h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtFeq1.md.png" alt=""></p><h3 id="二叉树的逻辑结构表示法："><a href="#二叉树的逻辑结构表示法：" class="headerlink" title="二叉树的逻辑结构表示法："></a><strong><font color=blue>二叉树的逻辑结构表示法：</font></strong></h3><p>① 树形表示法</p><p>② 文氏图表示法</p><p>③ 凹入表示法</p><p>④ 括号表示法</p><h3 id="二叉树和二次树区别："><a href="#二叉树和二次树区别：" class="headerlink" title="二叉树和二次树区别："></a><strong><font color=red>二叉树和二次树区别：</font></strong></h3><p>① <strong>度不同</strong></p><p>度为2的树要求每个节点最多只能有两棵子树，并且至少有一个节点有两棵子树。二叉树的要求是度不超过2，节点最多有两个叉，可以是1或者0。</p><p>② <strong>分支不同</strong></p><p>度为2的树有两个分支，但分支没有左右之版分；一棵二叉树也有两个分支，但有左右之分，左右子树的次序不能随意颠倒。</p><p>③ <strong>次序不同</strong></p><p>度为2的树从形式上看与二叉树很相似，但它的子树是无序的，而二叉树是有序的。即，在一般树中若某结点只有一个孩子，就无需区分其左右次序，而在二叉树中即使是一个孩子也有左右之分。</p><h3 id="两种特殊的二叉树："><a href="#两种特殊的二叉树：" class="headerlink" title="两种特殊的二叉树："></a><strong><font color=blue>两种特殊的二叉树：</font></strong></h3><p><strong><font color=red>满二叉树：</font></strong></p><p>在一棵二叉树中：</p><p>① 如果所有分支节点都有分支节点;</p><p>② 并且叶节点都集中在二叉树的最下一层。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtZfxS.md.png" alt=""></p><p><strong><font color=red>完全二叉树：</font></strong></p><p>在一棵二叉树中：</p><p>① 最多只有下面两层节点的度数小于2</p><p>② 并且最下面一层的叶节点都依次排列在该层最左边的位置上。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtYujA.md.png" alt=""></p><p><strong><font color=red>完全二叉树</font></strong> 实际上是对应的 <strong><font color=red>满二叉树</font></strong> 删除叶节点层最右边若干个节点得到的。</p><h2 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YttzLR.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtNVQH.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtNESe.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Ytdrp8.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Ytds1S.md.png" alt=""></p><h2 id="二叉树与树、森林之间的转换"><a href="#二叉树与树、森林之间的转换" class="headerlink" title="二叉树与树、森林之间的转换"></a>二叉树与树、森林之间的转换</h2><h3 id="1-森林、树转换为二叉树"><a href="#1-森林、树转换为二叉树" class="headerlink" title="1. 森林、树转换为二叉树"></a><strong><font color=red>1. 森林、树转换为二叉树</font></strong></h3><p><strong>一棵树转换为二叉树</strong></p><p>① 把兄弟节点连接起来</p><p>② 所有节点顺时针旋转45度</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Yt02iq.md.png" alt=""></p><p><strong>多颗树转换为二叉树</strong></p><p><strong>方法一：</strong></p><p>① 把每个树分别转换为二叉树</p><p>② 把后一个二叉树作为前一个二叉树的右子树，依次连接成一棵二叉树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Yt0con.md.png" alt=""></p><p><strong>方法二：</strong></p><p>① 给这几个树加上一个根节点</p><p>② 再将这棵新的树转换为二叉树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Yt0yZj.md.png" alt=""></p><h3 id="2-二叉树还原为森林、树"><a href="#2-二叉树还原为森林、树" class="headerlink" title="2. 二叉树还原为森林、树"></a><strong><font color=red>2. 二叉树还原为森林、树</font></strong></h3><p>*<em>一棵二叉树还原为一棵 树 *</em></p><p>① 考察每个节点的右分支节点，把每个右分支节点节点与它的双亲节点连接起来</p><p>② 删除掉右分支线</p><p>③ 再将此树逆时针旋转45度。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtBXAs.md.png" alt=""></p><p>*<em>一棵二叉树还原为 多颗树 *</em></p><p>① 考察这棵树，把从根节点的右分支节点开始，每个节点对应的树圈起来。也就是把这棵二叉树转换为3棵二叉树(以图为例)</p><p>② 再把三棵二叉树分别还原成树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Ytr1MT.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YtrQzV.md.png" alt=""></p><p><strong><font color=green>例题：</font></strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/Yt7jUI.md.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;二叉树的定义&quot;&gt;&lt;a href=&quot;#二叉树的定义&quot; class=&quot;headerlink&quot; title=&quot;二叉树的定义&quot;&gt;&lt;/a&gt;二叉树的定义&lt;/h2&gt;&lt;p&gt;二叉树是有限的节点集合 （&lt;strong&gt;&lt;font color=red&gt;递归定义&lt;/font&gt;&lt;/stro
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"/>
-    
-    
-      <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树的概念运算和存储结构 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/05/24/%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BF%90%E7%AE%97%E5%92%8C%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/05/24/%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BF%90%E7%AE%97%E5%92%8C%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-24T11:10:43.000Z</published>
-    <updated>2020-07-30T11:01:12.909Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="树的概念"><a href="#树的概念" class="headerlink" title="树的概念"></a>树的概念</h2><h3 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h3><p><strong><font color=red>树形式化定义：</font></strong>T = {D, R} 。（D表示 数据对象，R 表示数据关系）</p><p>D是包含n个节点的有限集合（n≥0）。当n = 0时为 <strong>空树</strong>，否则关系 R 满足以下条件：</p><p>① 有且仅有一个节点 d0 ∈ D，它对于关系R来说没有前趋节点，节点d0称作 树的 <font color=red><strong>根节点</strong></font>。</p><p>② 除<font color=red> <strong>根节点</strong> </font>外每个节点有且 <font color=red><strong>仅有一个前趋节点</strong></font>。</p><p>③ D中每个节点可以有 <font color=red><strong>零个或多个后继节点</strong></font> 。</p><p><strong><font color=red>树的递归定义：</font></strong>树是由n （n≥0）个节点组成的有限集合（记为T）。其中：</p><p>① 如果n = 0, 它是一棵空树，这是树的特例。</p><p>② 如果n &gt; 0, 其中存在一个唯一节点作为输的根节点（root），其余节点可分为m（m≥0）个互不相交的有限子集T1、T2 、…、Tm，而每个子集本身又是一棵 <font color=red><strong>树</strong></font> ，称为根节点root的子树。</p><p>**<font color=blue>树中所有节点构成一种层次关系</font> **</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/YlI2GR.md.jpg" style="zoom:50%;" /><h3 id="树的实际应用"><a href="#树的实际应用" class="headerlink" title="树的实际应用"></a>树的实际应用</h3><p>① <strong>红黑树:</strong> JAVA8中的hashMap满足一定的阈值，自动扩容时会变为红黑树，treeMap，linux中的epoll模型，nginx中的Timer管理等。</p><p>② <strong>B，B＋树:</strong>广泛用于数据库(mysql，oracle等)的索引。</p><p>③ <strong>字典树:</strong>用于海量文本词频统计，查询效率比哈希表还高。</p><p>④ 生活中的树状结构有公司职级关系，国家省市区级联，族谱等等都有树结构形式.</p><h3 id="树的（逻辑）表示"><a href="#树的（逻辑）表示" class="headerlink" title="树的（逻辑）表示"></a>树的（逻辑）表示</h3><p>(1) <font color=red><strong>树形表示法：</strong></font> 使用一棵倒置的树表示树结构，非常直观和形象。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/YlzPFx.png" style="zoom: 67%;" /><p>(2) <font color=red><strong>文氏图表示法：</strong></font> 使用集合以及集合的包含关系来描述树结构。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/YlziY6.png" style="zoom: 50%;" /><p>(3) <font color=red><strong>凹入表示法：</strong></font>使用线段的伸缩关系描述树结构</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/YlzFfK.png" style="zoom:50%;" /><p>(4) <font color=red><strong>括号表示法：</strong></font>用一个字符串表示树</p><p>基本形式： 根（子树1，子树2，…，子树m）</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Ylz9T1.png" style="zoom:50%;" /><h3 id="树的基本术语"><a href="#树的基本术语" class="headerlink" title="树的基本术语"></a>树的基本术语</h3><p><strong><font color=red>1. 节点的度与树的度：</font></strong></p><p>树中一个节点的子树的个数称为该<font color=red><strong>节点的度</strong></font>。树中各节点的度的最大值称为<font color=red><strong>树的度</strong></font>，通常将度为m的树称为 <font color=red><strong>m次树</strong></font> 或者 <font color=red><strong>m叉树</strong></font>。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y19tne.png" style="zoom:50%;" /><p><strong><font color=red>2. 分支节点与叶节点：</font></strong></p><p>度不为0的节点称为非终端节点，又叫 <font color=red><strong>分支节点</strong></font>。度为0的节点称为终端节点或<font color=red><strong>叶节点</strong></font>（或<font color=red><strong>叶子节点</strong></font>）。</p><p>度为1的节点称为 <font color=red><strong>单分支节点</strong></font>；度为2的节点称为<font color=red><strong>双分支节点</strong></font>，依次类推。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1PFMT.png" alt="Y1PFMT.png" style="zoom:50%;" /><p><strong><font color=red>3. 路径与路径长度：</font></strong></p><p>两个节点di和dj的节点序列（di，di1，di2，…，dj）称为<font color=red><strong>路径</strong></font>。其中&lt;dx,dy&gt;是 分支。</p><p><strong><font color=red>路径长度</font></strong> 等于路径所通过的节点数目减1（即路径上分支数目）。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1PksU.png" alt="Y1PksU.png" style="zoom:67%;" /><p><strong><font color=red>4. 孩子节点，双亲节点和兄弟节点：</font></strong></p><p>在一棵树中。每个节点的后继称作该节点的 <font color=red><strong>孩子节点</strong></font>（或子女节点）。相应地，该节点被称作孩子节点的 <font color=red><strong>双亲节点</strong></font>（或父母节点）。具有同一双亲的孩子节点互为 <font color=red><strong>兄弟节点</strong></font>。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1PVZ4.png" alt="Y1PVZ4.png" style="zoom:67%;" /><p><strong><font color=red>5.子孙节点和祖先节点：</font></strong></p><p>在一棵树中，一个节点的所有子树中的节点称为该节点的 <font color=red><strong>子孙节点</strong></font>。</p><p>从根节点到达一个节点的路径上经过的所有节点被称为该节点的<font color=red><strong>祖先节点</strong></font>。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1PALF.png" alt="Y1PALF.png" style="zoom:67%;" /><p><strong><font color=red>6.节点的层次和树的高度：</font></strong></p><p>树中的每个节点都处在一个层次上。节点的层次从树根开始定义，根节点为第一层，它的孩子节点为第二层，以此类推，一个节点所在的层次为其双亲节点所在层次加1。</p><p>树中节点的最大层次称为树的<font color=red><strong>树的高度</strong></font>（或树的 <font color=red><strong>深度</strong></font>）。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1kT0S.png" style="zoom:67%;" /><p><strong><font color=red>7.有序树和无需树：</font></strong></p><p>若树中各节点的子树是按照一定的次序从左往右安排的，且相对次序是不能随意变换的，则称为 <font color=red><strong>有序树</strong></font>，否则称为 <font color=red><strong>无序树</strong></font>。</p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/09/Y1AMAe.png" style="zoom:67%;" /><p><strong><font color=red>8.森林：</font></strong></p><p>n（n&gt;0）个互不相交的树的集合称为 <font color=red><strong>森林</strong></font>。</p><p>只要把树的根节点删去就成了森林。反之，只要给n棵独立的树加上一个根节点，并把这n棵树作为该节点的子树，则森林就变成了一棵树。</p><p><strong><font color=blue>独木也成林！！</font></strong></p><h3 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h3><p><strong><font color=red>性质1：</font></strong>树中的节点数等于所有节点的度数+1</p><p>① 树中每个分支为一个节点的度  →  <font color=blue><strong>所有节点的度之和 = 分支数</strong></font></p><p>② 根节点加上一个分支，这分支数与节点数相同 → <font color=blue><strong>实际分支数 = n-1</strong></font></p><p><strong><font color=blue>n = 度之和 +1</font></strong></p><p><strong><font color=green>例题：</font></strong></p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y3fEpq.png" style="zoom:67%;" /><p><strong><font color=red>性质2：</font></strong>度为m的树中第i层上至多有m的(i-1)次个节点（i≥1）</p><p><strong><font color=blue>度为3的树第二层至多有3个节点</font></strong>    3的(2-1)次 = 3</p><p><strong><font color=red>性质3：</font></strong></p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y34AyV.png" style="zoom:67%;" /><p><strong><font color=red>性质4：</font></strong></p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y34kQ0.png" style="zoom:80%;" /><h2 id="树的运算和存储结构"><a href="#树的运算和存储结构" class="headerlink" title="树的运算和存储结构"></a>树的运算和存储结构</h2><h3 id="树的基本运算"><a href="#树的基本运算" class="headerlink" title="树的基本运算"></a>树的基本运算</h3><p>树的运算主要分为三大类：</p><p><font color=red><strong>查找</strong></font>满足某种特点关系的节点，如查找当前节点的双亲节点等;</p><p><font color=red><strong>插入或删除</strong></font>某个节点，如在树的当前节点上插入一个新节点或者删除当前节点的第i个孩子节点等</p><p><font color=red><strong>遍历</strong></font>树中每个节点。</p><h4 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h4><p>树的遍历运算是指按照某种访问方式访问树中的 <strong><font color=blue>每一个节点且每一个节点只能被访问一次。</font></strong></p><p><strong><font color=green>主要的遍历方法：</font></strong></p><p>① <font color=red><strong>先根遍历：</strong></font>若树不空，则先访问根节点，然后依次先根遍历各棵子树。</p><p>② <font color=red><strong>后根遍历：</strong></font>若树不空，则依次后根遍历各棵子树，然后访问根节点。</p><p>③ <font color=red><strong>层次遍历：</strong></font>若树不空，则自上而下、自左至右访问树中每个节点。</p><p><strong><font color=red>注意：</font><font color=blue>先根和后根遍历算法都是递归的。</font></strong></p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y3ThUU.md.png" style="zoom:50%;" /><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y3T45F.md.png" style="zoom:50%;" /><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y3TfET.md.png" style="zoom:50%;" /><h3 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h3><p><strong><font color=red>1. 双亲存储结构</font></strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y8FfZ8.md.png" alt=""></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 双亲存储结构的类型声明如下</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;   <span class="comment">//节点的值</span></span><br><span class="line">    <span class="keyword">int</span> parent;      <span class="comment">//指向双亲的位置</span></span><br><span class="line">&#125;PTree[MaxSize];</span><br></pre></td></tr></table></figure><p><strong><font color=red>2. 孩子链存储结构</font></strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y8k7kD.md.png" alt=""></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 孩子链存储结构的类型声明如下</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;   <span class="comment">//节点的值</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> * <span class="title">sons</span>[<span class="title">MaxSons</span>];</span>      <span class="comment">//指向孩子节点</span></span><br><span class="line">&#125;PSonNode;</span><br></pre></td></tr></table></figure><p>其中，MaxSons为最多的孩子节点个数。</p><p><strong><font color=red>3. 孩子兄弟链存储结构</font></strong></p><p>孩子兄弟链存储结构是为每个节点设计3个域：</p><p>① 一个数据元素域</p><p>② 第一个孩子节点指针域</p><p>③  一个兄弟节点指针域</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/10/Y8A7D0.md.png" alt=""></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 孩子兄弟链存储结构的类型声明如下</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;   <span class="comment">//节点的值</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tnode</span> * <span class="title">hp</span>;</span>      <span class="comment">//指向兄弟节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tnode</span> * <span class="title">vp</span>;</span>      <span class="comment">//指向第一个孩子节点</span></span><br><span class="line">&#125;TSBNode;</span><br></pre></td></tr></table></figure><p>每个节点固定只有两个指针域！！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;树的概念&quot;&gt;&lt;a href=&quot;#树的概念&quot; class=&quot;headerlink&quot; title=&quot;树的概念&quot;&gt;&lt;/a&gt;树的概念&lt;/h2&gt;&lt;h3 id=&quot;树的定义&quot;&gt;&lt;a href=&quot;#树的定义&quot; class=&quot;headerlink&quot; title=&quot;树的定义&quot;&gt;&lt;/a
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"/>
-    
-    
-      <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
   </entry>
   
