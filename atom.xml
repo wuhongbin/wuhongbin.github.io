@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wuhongbin.github.io/"/>
-  <updated>2020-08-08T11:11:04.272Z</updated>
+  <updated>2020-08-09T09:57:20.488Z</updated>
   <id>https://wuhongbin.github.io/</id>
   
   <author>
@@ -15,6 +15,69 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>查找之B+树 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/14/%E6%9F%A5%E6%89%BE%E4%B9%8BB+%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/14/%E6%9F%A5%E6%89%BE%E4%B9%8BB+%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-14T07:15:50.000Z</published>
+    <updated>2020-08-09T09:57:20.488Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h1><p>一棵m阶B+树满足如下特性:  </p><ol><li>每个分支结点最多有m棵子树子结点)</li><li>若根结点不是终端结点,则至少有两棵子树</li><li>除根结点外的所有非叶结点至少有 (m/2)取上界 棵子树, <strong>子树和关键字个数相等</strong></li><li>所有叶结点包含全部关键字及指向相应记录的指针,叶结点中将关键字按大小顺序排列, 并且相邻结点按大小顺序连接起来</li><li>所有分支结点(可视为索引的索引)中仅包含他的各个子结点(下一级索引块)中关键字的最大值及指向其子结点的指针</li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aT7t8s.png" alt=""></p><h1 id="B-树-VS-B树"><a href="#B-树-VS-B树" class="headerlink" title="B+树 VS B树"></a>B+树 VS B树</h1><ol><li><p>在B+树中, 具有η个关键字的结点值含有n棵子树,即每个关键字对应一棵子树</p><p>在B树中, 具有n个关键字的结点含有n+1棵子树</p></li><li><p>在B+树中,叶结点包含信息, 所有非叶结点仅起索引作用, 非叶结点中的毎个索引项只含有对应子树的最大关键字和指向该子树关键字的指针, 不 含有该关键字对应记录的存储地址</p></li><li><p>在B+树中, 叶结点包含全部关键字,即在非叶结点中出现的关键字也会 出现在叶结点中棵子树</p><p>在B树中,叶结点包含的关键字和其他结点包含的关键字是不重复的</p></li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTHLY4.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;基本定义&quot;&gt;&lt;a href=&quot;#基本定义&quot; class=&quot;headerlink&quot; title=&quot;基本定义&quot;&gt;&lt;/a&gt;基本定义&lt;/h1&gt;&lt;p&gt;一棵m阶B+树满足如下特性:  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每个分支结点最多有m棵子树子结点)&lt;/li&gt;
+&lt;li&gt;若根结点不
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
+    
+    
+      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
+    
+      <category term="B+树" scheme="https://wuhongbin.github.io/tags/B-%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查找之B树 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/14/%E6%9F%A5%E6%89%BE%E4%B9%8BB%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/14/%E6%9F%A5%E6%89%BE%E4%B9%8BB%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-14T02:15:50.000Z</published>
+    <updated>2020-08-09T09:39:22.051Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h1><p><strong>B树</strong> 又称多路平衡查找树，B树中所有结点的 <strong>孩子结点数</strong> 的最大值称为B树的阶。</p><blockquote><p>一棵m阶B树或为空树，或为满足如下特性的m叉树：</p><ol><li><p>树中每个结点至多有m棵子树（即至多含有m-1个关键字）</p></li><li><p>若根结点不是终端结点，则至少有两棵子树</p></li><li><p>除根结点外的所有非叶结点至少有 <strong>m/2 (取上界)</strong>  棵子树（即 *<em>m/2 (取上界) *</em>- 1 个关键字）</p></li><li><p>非叶结点的结构：</p><p>   <img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/ao7tfA.png" alt="">                     </p></li><li><p>所有的叶结点都出现在同一层次上，并不带任何信息</p></li></ol></blockquote><h1 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aoHuNQ.png" alt=""></p><p>首先，这棵B树中 <strong>孩子结点数的最大值是3</strong>，所以这棵树的 <strong>阶为3</strong>，即为 <strong>3阶B树</strong></p><ol><li><p>由图中可看出，树中每个结点至多有3棵子树（即至多含有2个关键字）</p></li><li><p>例如 10，15，20 结点，不是终端结点，至少有两棵子树</p></li><li><p>m/2 (取上界)  = 3/2(取上界) = <strong>2</strong>，m/2 (取上界) - 1  =  3/2(取上界) - 1 = <strong>1</strong>，满足要求</p></li><li><p>Ki :  18 &lt; 33,   Pi 和 Pi-1 ：12 &lt; 18 , 48 &gt; 33 ,  满足要求</p></li><li><p>如图，最下面的叶结点均在一层，且不带任何信息</p></li></ol><h1 id="问题探究"><a href="#问题探究" class="headerlink" title="问题探究"></a>问题探究</h1><blockquote><p><strong>n个关键字,阶数为m,高度为h的B ? ? ?</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aoxTA0.png" alt=""></p><h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTFEJ1.png" alt=""></p><blockquote><ol><li>在B树中找结点             <strong>磁盘</strong></li><li>在结点中找关键字        <strong>内存</strong></li></ol></blockquote><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><ol><li><p><strong>定位</strong></p><p>查找插入该关键字的位置，即最底层中的某个非叶子结点（规定一定是插入在最底层的某个非叶子结点内）</p></li><li><p><strong>插入</strong><br>若插入后，不破会m阶B树的定义，即插入后结点关键字个数在属于区间[m/2 -1, m-1]，则直接插入；<br>若插入后，关键字数量大于m-1，则对插入后的结点进行分裂操作；<br>分裂：<br>插入后的结点中间位置（[m/2]）关键字并入父结点中，<br>中间结点左侧结点留在原先的结点中，右侧结点放入新的节点中，<br>若并入父节点后，父结点关键字数量超出范围，继续想上分裂，直到符合要求为止。</p></li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aT27X4.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aT2bnJ.png" alt=""></p><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTRm38.png" alt=""></p><h3 id="终端节点删除"><a href="#终端节点删除" class="headerlink" title="终端节点删除"></a>终端节点删除</h3><ol><li><strong>直接删除</strong></li></ol><p>​    若被删除关键字所在结点关键字总数 &gt;「m/2 ] - 1 , 表明删除后仍满足B树定义, 直接删除 </p><ol start="2"><li><strong>兄弟够借</strong></li></ol><p>​    若被删除关键字所在结点关键字总数 =「m/2 ] - 1 ,且与此结点邻近的兄弟结点的关键字个数&gt;「m/2] , 则需要从兄弟结点借一个关键字,此过程需要调整该结点、双亲结点和兄弟结点的关键字</p><ol start="3"><li><strong>兄弟不够借</strong></li></ol><p>​    若被删除关键字所在结点关键字总数=「m/2] - 1, 且与此结点邻近的兄弟结点的关键字个数=「m/2] -1, 则删除关键字, 并与一个不够借的兄弟结点和双亲结点中两兄弟子树中间的关键字合并。合并后若双亲结点因减少一个结点导致不符合定义, 则继续执行2、3步骤 。</p><blockquote><p><strong>下面请仔细观察图（想着上方步骤）</strong></p></blockquote><blockquote><p><strong>直接删除</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aThfrF.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aThhb4.png" alt=""></p><blockquote><p><strong>兄弟够借</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aThWKU.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTh5VJ.png" alt=""></p><blockquote><p><strong>兄弟不够借</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aT4Eqg.png" alt=""></p><h3 id="非终端节点删除"><a href="#非终端节点删除" class="headerlink" title="非终端节点删除"></a>非终端节点删除</h3><ol><li>若小于k的子树中关键字个数 &gt; [m/2] -1, 则找出k的前驱值k,并用k来取代k,再递归地删除k即可。  </li><li>若大于k的子树中关键字个数 &gt; [m/2] -1, 则找出k的后继值k,并用k来取代k,再递归地删除k即可。    </li><li>若前后两子树关键字个数均为「m/2] -1, 则直接两个子结点合并,  然后删除k即可。</li></ol><blockquote><p><strong>前驱值：</strong>结点左边子树的最右边的结点的关键字</p><p><strong>后驱值：</strong>结点右边子树的最左边的结点的关键字</p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTTkfs.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTTZ60.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/09/aTTEpn.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;基本定义&quot;&gt;&lt;a href=&quot;#基本定义&quot; class=&quot;headerlink&quot; title=&quot;基本定义&quot;&gt;&lt;/a&gt;基本定义&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;B树&lt;/strong&gt; 又称多路平衡查找树，B树中所有结点的 &lt;strong&gt;孩子结点数&lt;/strong&gt; 
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
+    
+    
+      <category term="B树" scheme="https://wuhongbin.github.io/tags/B%E6%A0%91/"/>
+    
+      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>查找之平衡二叉树 详细总结</title>
@@ -539,63 +602,6 @@
     
     
       <category term="图" scheme="https://wuhongbin.github.io/tags/%E5%9B%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>哈夫曼树 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/05/31/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/05/31/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-31T09:46:43.000Z</published>
-    <updated>2020-07-30T10:57:26.775Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="哈夫曼树的定义"><a href="#哈夫曼树的定义" class="headerlink" title="哈夫曼树的定义"></a>哈夫曼树的定义</h2><p>设二叉树具有n个带权值的叶节点，那么从根节点到各个叶节点的路径长度与相应节点权值的乘积的和，叫做二叉树的 <strong><font color=red>带权路径长度</font></strong>。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHXvHe.png" alt=""></p><p> <strong><font color=red>权：</font></strong> 权代表的是叶子结点的数据信息,是具体的值。也就是结点所储存的值</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHjYE4.png" alt=""></p><p>具有最小带权路径长度的二叉树称为 <strong><font color=red>哈夫曼树 (也称最优数)</font></strong> 。</p><p>相同的叶节点构造出不同的二叉树</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHjX2q.md.png" alt=""></p><h2 id="构造哈夫曼树"><a href="#构造哈夫曼树" class="headerlink" title="构造哈夫曼树"></a>构造哈夫曼树</h2><p>构造哈夫曼树的 <strong><font color=red>原则：</font></strong></p><p>① 权值越大的叶节点越靠近根节点</p><p>② 权值越小的叶节点越远离根节点</p><p>构造哈夫曼树的 <strong><font color=red>过程：</font></strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHvMIH.md.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHxoNQ.md.png" alt=""></p><p><strong><font color=red>哈夫曼树的特点：</font></strong> <strong>n1 = 0</strong></p><p><strong>n = n0 + n1 + n2  =  n0 + n2  =  2n0 - 1</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/12/YttzLR.md.png" alt=""></p><h2 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><p>规定哈夫曼树中的 <strong><font color=red>左分支为0，右分支为1</font></strong> ，则从根节点到每个节点所经过的分支对应的0和1组成的序列便为该节点对应字符的编码。这样的编码称为 <strong><font color=red>哈夫曼编码</font></strong>。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/Ybp961.md.png" alt=""></p><p>在一组字符的哈夫曼编码中，不可能出现一个字符的哈夫曼编码是另一个字符哈夫曼编码的 <strong><font color=red>前缀</font></strong>。</p><p>例如，有4个字符的编码如下：100,  001,  0，1</p><p>这是哈夫曼编码吗？显然是错误的，因为0是001的前缀，不可能。</p><p>所以哈夫曼编码也称为 <strong><font color=red>前缀编码</font></strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/Ybpc9J.md.png" alt=""></p><p>分析：选 <strong>D</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/Ybpb3d.md.png" alt=""></p><p>分析：选 <strong>A</strong>。哈夫曼树一定是二叉树，但不一定是完全二叉树。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;哈夫曼树的定义&quot;&gt;&lt;a href=&quot;#哈夫曼树的定义&quot; class=&quot;headerlink&quot; title=&quot;哈夫曼树的定义&quot;&gt;&lt;/a&gt;哈夫曼树的定义&lt;/h2&gt;&lt;p&gt;设二叉树具有n个带权值的叶节点，那么从根节点到各个叶节点的路径长度与相应节点权值的乘积的和，叫做二叉
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"/>
-    
-    
-      <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="哈夫曼树" scheme="https://wuhongbin.github.io/tags/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线索二叉树 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/05/30/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/05/30/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-30T02:46:43.000Z</published>
-    <updated>2020-07-30T10:57:55.807Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇博文我总结了一下 线索二叉树知识点…</p><a id="more"></a><h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>对于具有n个节点的二叉树，采用二叉链存储时，每个节点有两个指针域，总共有 <strong>2n</strong> 个指针域。</p><p>其中只有 n-1 个节点被有效指针指向，即有 <strong>n-1</strong> 个非空指针域。</p><p>所以共有 2n - (n-1) = <strong>n+1</strong> 个空链域。</p><p><strong><font color=green>解释：</font></strong> <strong>除根节点</strong> （根节点没有指针指向）外，每个节点都有且仅有一个指向自己的指针，所以N个节点的二叉树，需要N-1个指针域，则空指针域有N+1个。</p><h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>① 采用某种方法遍历二叉树的结果是一个节点的 <strong><font color=red>线性序列</font></strong> 。</p><p>② <strong><font color=red>修改空链域</font></strong> 改为存放指向节点的前趋和后继节点的地址。</p><p>③ 这样的指向该线性序列中的 “ 前趋 ” 和 “ 后继 ” 的指针，称作 <strong><font color=red>线索 (thread)</font></strong> 。</p><p>④ 创建线索的过程称为 <strong><font color=red>线索化</font></strong> 。</p><p>⑤ <strong><font color=red>线索化的</font></strong> 二叉树称为 线索二叉树。</p><p>⑥ 显然线索二叉树与采用的遍历方法相关，有 <strong><font color=red>先序线索二叉树、中序线索二叉树和后序线索二叉树</font></strong>。</p><p>⑦ 线索二叉树的目的是提高 <strong><font color=red>该遍历过程</font></strong> 的效率。</p><h2 id="设计线索二叉树"><a href="#设计线索二叉树" class="headerlink" title="设计线索二叉树"></a>设计线索二叉树</h2><p>在节点的存储结构上增加 <strong><font color=red>两个标志位</font></strong> 来区分这两种情况：</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHB8it.png" alt=""></p><p>这样，每个节点的存储结构如下：</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHBYz8.png" alt=""></p><p>为了方便算法设计，在线索二叉树中再增加 <strong><font color=red>一个头节点</font></strong> 。</p><p>线索化二叉树中节点的类型定义如下：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;           <span class="comment">//节点数据域</span></span><br><span class="line">    <span class="keyword">int</span> ltag, rtag;          <span class="comment">//增加的线索标记</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> * <span class="title">lchild</span>;</span>    <span class="comment">//左孩子或者线索指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> * <span class="title">rchild</span>;</span>    <span class="comment">//右孩子或者线索指针    </span></span><br><span class="line">&#125;TBTNode;      <span class="comment">//线索树节点类型定义</span></span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHrD2V.md.png" alt=""></p><h2 id="线索化二叉树"><a href="#线索化二叉树" class="headerlink" title="线索化二叉树"></a>线索化二叉树</h2><p>建立某种次序的线索化二叉树过程：</p><p>(1) 以该遍历方法遍历一棵二叉树。</p><p>(2) 在遍历的过程中，检查当前访问节点的左、右指针域是否为空：</p><p>​        ① 如果左指针域为空，将它改为指向前趋节点的线索；</p><p>​        ② 如果右指针域为空，将它改为指向后继节点的线索。</p><p>下面以 <strong><font color=red>中序线索二叉树</font></strong> 为例，设计建立线索二叉树的算法。</p><h3 id="建立中序线索二叉树的算法"><a href="#建立中序线索二叉树的算法" class="headerlink" title="建立中序线索二叉树的算法"></a>建立中序线索二叉树的算法</h3><p> ① <strong><font color=red>CreaThread(b)算法：</font></strong> 对以二叉链存储的二叉树b进行中序线索化，并返回线索化后头节点的指针root。</p><p>② <strong><font color=red>Thread(p)算法：</font></strong> 对以 *p 为根节点的二叉树子树的中序线索化。</p><p>在中序遍历中：</p><p>① p总是指向当前线索化的节点。</p><p>② pre 作为全局变量，指向刚刚访问过的节点。</p><p>③  ＊pre  是 ＊p 的中序前趋节点， ＊ p 是 ＊pre  的中序后继节点。</p><p>  <img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHcweU.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHgAmT.md.png" alt=""></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">TBTNode * pre;      <span class="comment">//全局变量</span></span><br><span class="line"><span class="function">TBTNode * <span class="title">CreatThread</span><span class="params">(TBTNode * b)</span>      <span class="comment">//中序线索化二叉树</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TBTNode * root;</span><br><span class="line">    root = (TBTNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TBTNode));  <span class="comment">//创建头节点</span></span><br><span class="line">    root-&gt;ltag = <span class="number">0</span>; </span><br><span class="line">    root-&gt;rtag = <span class="number">1</span>;</span><br><span class="line">    root-&gt;rchild = b;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="literal">NULL</span>)</span><br><span class="line">        root-&gt;lchild = root;<span class="comment">//空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        root-&gt;lchild = b; </span><br><span class="line">        pre = root;<span class="comment">//pre是*p的前趋节点，供加加线索用</span></span><br><span class="line">        Thread(b);<span class="comment">//中序遍历线索化二叉树</span></span><br><span class="line">        pre-&gt;rchild = root;<span class="comment">//最后处理，加入指向头节点的线索</span></span><br><span class="line">        pre-&gt;rtag = <span class="number">1</span>;</span><br><span class="line">        root-&gt;rchild = pre;<span class="comment">//头节点线索化</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Thread</span><span class="params">(TBTNode *&amp; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//中序遍历递归算法</span></span><br><span class="line">        Thread(p-&gt;lchild);<span class="comment">//左子树线索化</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild == <span class="literal">NULL</span>)<span class="comment">//前趋线索化</span></span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;lchild = pre;<span class="comment">//建立当前节点的前趋线索</span></span><br><span class="line">            p-&gt;ltag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p-&gt;ltag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(pre-&gt;rchild == <span class="literal">NULL</span>)<span class="comment">//后继线索化</span></span><br><span class="line">        &#123;</span><br><span class="line">            pre-&gt;rchild = p;<span class="comment">//建立前趋节点的前趋线索</span></span><br><span class="line">            pre-&gt;rtag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p-&gt;rtag = <span class="number">0</span>;</span><br><span class="line">        pre = p; </span><br><span class="line">        Thread(p-&gt;rchild);<span class="comment">//递归调用右子树线索化 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="遍历线索化二叉树"><a href="#遍历线索化二叉树" class="headerlink" title="遍历线索化二叉树"></a>遍历线索化二叉树</h2><p>遍历某种次序的线索二叉树，就是从该次序下的 <strong><font color=red>开始节点</font></strong> 出发，反复找到该节点在该次序下的后继节点，直到头节点。</p><p>以中序线索二叉树为例，开始节点时根节点的最左下节点。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YH78Fx.md.png" alt=""></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在中序线索二叉树中中序遍历的过程:</span><br><span class="line">p指向根节点;</span><br><span class="line">while p ≠ root 时循环</span><br><span class="line">&#123;</span><br><span class="line">找开始节点 *p;</span><br><span class="line">访问 *p 节点;</span><br><span class="line">while(*p 节点有右线索)</span><br><span class="line">一直访问下去;</span><br><span class="line">    p 转向右孩子节点;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/05/21/YHHN40.md.png" alt=""></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThInOrder</span><span class="params">(TBTNode * tb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TBTNode * p = tb-&gt;lchild;<span class="comment">//p指向根节点</span></span><br><span class="line">    <span class="keyword">while</span>(p!=tb)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;ltag == <span class="number">0</span>)</span><br><span class="line">            p = p-&gt;lchild;<span class="comment">//找开始节点</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>, p-&gt;data);<span class="comment">//访问开始节点</span></span><br><span class="line">        <span class="keyword">while</span>(p-&gt;rtag == <span class="number">1</span> &amp;&amp; p-&gt;rchild != tb)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>, p-&gt;data);</span><br><span class="line">        &#125;</span><br><span class="line">    p = p-&gt;rchild;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong><font color=red>优点：</font></strong> 中序遍历算法既没有递归也没有用栈，空间效率得到提高。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇博文我总结了一下 线索二叉树知识点…&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="树" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"/>
-    
-    
-      <category term="树和二叉树" scheme="https://wuhongbin.github.io/tags/%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="线索二叉树" scheme="https://wuhongbin.github.io/tags/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
   </entry>
   
