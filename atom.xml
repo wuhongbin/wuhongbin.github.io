@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wuhongbin.github.io/"/>
-  <updated>2020-08-13T10:22:23.046Z</updated>
+  <updated>2020-08-14T07:18:41.562Z</updated>
   <id>https://wuhongbin.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>排序之外部排序 详细总结</title>
+    <link href="https://wuhongbin.github.io/2020/06/20/%E6%8E%92%E5%BA%8F%E4%B9%8B%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
+    <id>https://wuhongbin.github.io/2020/06/20/%E6%8E%92%E5%BA%8F%E4%B9%8B%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
+    <published>2020-06-20T02:15:43.000Z</published>
+    <updated>2020-08-14T07:18:41.562Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p><strong>外部排序</strong> 通常采用归并排序方法。<br>首先，根据缓冲区的大小将外存上含有n个记录的文件分成若干长度为h的子文件，依次读入内存并利用有限的内部排序算法对它们进行排序，并将排序后得到的有序子文件重新写回外村，通常称这些有序子文件为 <strong>归并段或顺串</strong><br>然后，对这些归并段进行逐趟归并，使归并段逐渐由小到大直至得到整个有序文件</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCB076.png" alt=""></p><h2 id="时间计算"><a href="#时间计算" class="headerlink" title="时间计算"></a>时间计算</h2><p><strong>外部排序的总时间 = 内部排序所需时间 + 外存信息读写时间 + 内部归并所需时间</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCBgcd.png" alt=""></p><h2 id="失败树"><a href="#失败树" class="headerlink" title="失败树"></a>失败树</h2><p><strong>S趟归并总共需要比较的次数:</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCrXkV.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCyK8U.png" alt=""></p><p><strong>失败树：</strong> 树形选择排序的一种变体,可视为一棵完全二叉树  </p><p>每个叶结点存放各归并段在归并过程中当前参加比较的记录,  </p><p>内部结点用来记忆左右子树中的“失败者胜利者向上继续  进行比较,直到根结点</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCyPgg.png" alt=""></p><h2 id="置换-选择排序"><a href="#置换-选择排序" class="headerlink" title="置换-选择排序"></a>置换-选择排序</h2><p>设初始待排序文件为F, 初始归并段文件为FO, 内存工作区为WA, 内存工作区可容纳w个记录。</p><h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><ol><li>从待排序文件F输入w个记录到工作区WA;  </li><li>从内存工作区WA中选出其中关键字取最小值的记录,记为 MINIMAX;  </li><li>将MINIMAX记录输出到FO中; </li><li>若F未读完,则从F输入下一个记录到WA中; </li><li>从WA中所有MINIMAX关键字比记录的关键字大的记录中选出最小的关键字记录,作为新的 MINIMAX;  </li><li>重复3~5, 直到WA中选不出新的MINIMA记录位置, 由此得到一 个初始归并段,输出一个归并段的结束标志到FO中;  </li><li>重复2~6, 直到WA为空。由此得到全部初始归并段。</li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dC2rSf.png" alt=""></p><h1 id="最佳归并树"><a href="#最佳归并树" class="headerlink" title="最佳归并树"></a>最佳归并树</h1><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCRe9P.png" alt=""></p><p><strong>归并树：</strong> 用来描述m归并,并只有度为0和度为m的结点的严格m叉树</p><p>设由置换选择排序得到9个初始归并段  其记录的长度依次为9, 30, 12, 18, 3, 17, 2, 6, 24</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCo1Mt.png" alt=""></p><blockquote><p><strong>总IO次数为2*WPL=484</strong><br><strong>大带权路径长度之和为归并过程中的总读记录数</strong></p></blockquote><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCoLJH.png" alt=""></p><blockquote><p><strong>当叶子节点数不够时,增加权值为0的结点用来构造哈夫曼树</strong></p></blockquote><h3 id="补充虚段个数"><a href="#补充虚段个数" class="headerlink" title="补充虚段个数"></a>补充虚段个数</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dCTs1A.png" alt=""></p><p><strong>例子：</strong></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/08/14/dC7rUU.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a&gt;基本思想&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;外部排序&lt;/strong&gt; 通常采用归并排序方法。&lt;br&gt;首先，根据缓冲区的大小将外存上含有n个记录的文件分
+      
+    
+    </summary>
+    
+    
+      <category term="算法笔记" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="排序" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="外排序" scheme="https://wuhongbin.github.io/tags/%E5%A4%96%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="败者树" scheme="https://wuhongbin.github.io/tags/%E8%B4%A5%E8%80%85%E6%A0%91/"/>
+    
+      <category term="最佳归并树" scheme="https://wuhongbin.github.io/tags/%E6%9C%80%E4%BD%B3%E5%BD%92%E5%B9%B6%E6%A0%91/"/>
+    
+      <category term="置换-选择排序" scheme="https://wuhongbin.github.io/tags/%E7%BD%AE%E6%8D%A2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>排序之内部排序算法的比较与应用 详细总结</title>
@@ -574,41 +608,6 @@
       <category term="迪杰斯特拉(Dijkatra)算法" scheme="https://wuhongbin.github.io/tags/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89-Dijkatra-%E7%AE%97%E6%B3%95/"/>
     
       <category term="弗洛伊德(Floyd)算法" scheme="https://wuhongbin.github.io/tags/%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7-Floyd-%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图的应用之最小生成树 详细总结</title>
-    <link href="https://wuhongbin.github.io/2020/06/07/%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8%E4%B9%8B%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/"/>
-    <id>https://wuhongbin.github.io/2020/06/07/%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8%E4%B9%8B%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%20%E8%AF%A6%E7%BB%86%E6%80%BB%E7%BB%93/</id>
-    <published>2020-06-07T08:15:43.000Z</published>
-    <updated>2020-07-30T10:34:14.854Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h1><p><strong>定义：</strong> 连通图包含全部顶点的一个极小连通子图</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/apOGU1.png" alt=""></p><h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h1><p><strong>定义：</strong> 对于 <strong>带权无向连通图</strong> G = ( V, E ), G的所有生成树当中边的 <strong>权值之和最小</strong> 的生成树为G的 <strong>最小生成树(MST)</strong> 。</p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/apXPG6.png" alt=""></p><h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><ol><li><p>最小生成树不一定唯一,即最小生成树的树形不一定唯一。当带权无向连通图G的各边权值不等时或G只有结点数减1条边时,MST唯一    </p></li><li><p>最小生成树的权值是唯一的, 且是最小    </p></li><li><p>最小生成树的边数为顶点数减1</p></li></ol><h1 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h1><h2 id="Prim-（普里姆）算法"><a href="#Prim-（普里姆）算法" class="headerlink" title="Prim （普里姆）算法"></a>Prim （普里姆）算法</h2><h3 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h3><ol><li><strong>初始化：</strong>向空的结果树 T =（Vt，Et) 中添加图 G =（V, E) 的任一顶点u0，使 Vt = {u0}，Et为空集；</li><li><strong>循环（直到Vt = V)：</strong>从图G中选择满足 { (u, v) | u∈Vt ，v∈ V-Vt }且具有最小权值的边（u，v），并置Vt = Vt U {v} , Et =Et U (u, v) }。</li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9ClrV.png" alt=""></p><h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9AdH0.png" alt=""></p><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><blockquote><p><strong>辅助数组理解：</strong></p><p>min_weight [n] ：存放相关顶点间边的权值 </p><p><strong>表示最小生成树中已存放的顶点到未存放顶点的最小权值</strong></p><p>例：假设有 v0，v1，v2，v3，v4 这5个顶点</p><p>min_weight [5] = {0, 2, 0, 0, 0} <strong>表示最小生成树中已存放的顶点到顶点v1的最小权值是2</strong></p><p>adjvex [n] ：存放相关顶点的下标    </p><p>例：假设有 v0，v1，v2，v3，v4 这5个顶点</p><p>adjvex [5] = {0, 0, 1, 0, 1} <strong>表示顶点v2和顶点v4 这两个点和顶点v1间都有边</strong></p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MST_Prim</span><span class="params">(Graph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> min_weight[G.vexnum];<span class="comment">//存放相关顶点间边的权值</span></span><br><span class="line">    <span class="keyword">int</span> adjvex[G.vexnum];<span class="comment">//存放相关顶点的下标 </span></span><br><span class="line">     </span><br><span class="line">    <span class="comment">//初始化操作</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.vexnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        min_weight[i] = G.Edge[<span class="number">0</span>][i];<span class="comment">//将邻接矩阵第0行所有权值加入数组</span></span><br><span class="line">        adjvex[i] = <span class="number">0</span>;<span class="comment">//全部初始化为v0下标</span></span><br><span class="line">    &#125;</span><br><span class="line">                   </span><br><span class="line">    <span class="comment">//正式构造最小生成树的过程               </span></span><br><span class="line">    <span class="keyword">int</span> min_arc;<span class="comment">//临时变量，表示当前最小权值</span></span><br><span class="line">    <span class="keyword">int</span> min_vex;<span class="comment">//临时变量，表示当前最小权值边的顶点数组下标</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; G.vexnum; i++)   <span class="comment">//由于有一个顶点已在最小生成树中，所以只遍历n-1次</span></span><br><span class="line">    &#123;</span><br><span class="line">        min_arc = INT_MAX;<span class="comment">//初始化最小权值为65535等不可能数值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; G.vexnum; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//找出min_weight[]数组中已存的最小权值</span></span><br><span class="line">             <span class="keyword">if</span>(min_weight[j] != <span class="number">0</span> &amp;&amp; min_weight[j] &lt; min_arc)</span><br><span class="line">             &#123;</span><br><span class="line">                 min_arc = min_weight[j];</span><br><span class="line">                 min_vex = j;<span class="comment">//将发现最小权值的下标存入min_vex, 待使用</span></span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        min_weight[min_vex] = <span class="number">0</span>;<span class="comment">//将当前顶点的权值设为0，表示此顶点已完成任务</span></span><br><span class="line">        <span class="comment">//遍历全部顶点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; G.vexnum; j++)</span><br><span class="line">        &#123; </span><br><span class="line">             <span class="keyword">if</span>(min_weight[j] != <span class="number">0</span> &amp;&amp; G.Edge[min_vex][j] &lt; min_weight[j])</span><br><span class="line">             &#123;</span><br><span class="line">                 min_weight[j] = G.Edge[min_vex][j];</span><br><span class="line">                 adjvex[j] = min_arc;</span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>结论：</strong></p><p>此算法时间复杂度为 O(V2)，适用于<strong>稠密图</strong></p></blockquote><h2 id="Kruskal（克鲁斯卡尔）算法"><a href="#Kruskal（克鲁斯卡尔）算法" class="headerlink" title="Kruskal（克鲁斯卡尔）算法"></a>Kruskal（克鲁斯卡尔）算法</h2><h3 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h3><ol><li><strong>初始化：</strong>Vt = V，Et = 空集。即是每个顶点构成一棵独立的树，T是一个仅含V个顶点的森林；</li><li><strong>循环（直到T为树）：</strong>按图G的边的权值递增的顺序依次从 E-Et 中选择一条边，若这条边加入后不构成回路，则将其加入E，否则舍弃。</li></ol><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9WD8s.png" alt=""></p><h3 id="并查集（必看）"><a href="#并查集（必看）" class="headerlink" title="并查集（必看）"></a>并查集（必看）</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9jQIA.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9jMad.png" alt=""></p><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9j1PI.png" alt=""></p><h3 id="实例分析-1"><a href="#实例分析-1" class="headerlink" title="实例分析"></a>实例分析</h3><p><img src= "/img/loading.gif" data-src="https://s1.ax1x.com/2020/07/26/a9OeW6.png" alt=""></p><h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b;<span class="comment">//两个端点下标</span></span><br><span class="line">    <span class="keyword">int</span> weight;     <span class="comment">//权值</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MST_Kruskal</span><span class="params">(Graph G, Edge* edges, <span class="keyword">int</span>* parent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    heap_sort(edges);<span class="comment">//堆排序</span></span><br><span class="line">    Initial(parent);<span class="comment">//全部初始化为 -1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.arcnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a_root = Find(parent, edges[i].a);</span><br><span class="line">        <span class="keyword">int</span> b_root = Find(parent, edges[il.b);</span><br><span class="line">        <span class="keyword">if</span>(a_root != b_root)</span><br><span class="line">        Union(parent, a_root, b_root);<span class="comment">//合并</span></span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><strong>结论：</strong></p><p>此算法时间复杂度为 O(|E|log|E|)，适用于<strong>稀疏图</strong></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;生成树&quot;&gt;&lt;a href=&quot;#生成树&quot; class=&quot;headerlink&quot; title=&quot;生成树&quot;&gt;&lt;/a&gt;生成树&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;定义：&lt;/strong&gt; 连通图包含全部顶点的一个极小连通子图&lt;/p&gt;
-&lt;p&gt;&lt;img src= &quot;/img/loa
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="图" scheme="https://wuhongbin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/"/>
-    
-    
-      <category term="最小生成树" scheme="https://wuhongbin.github.io/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/"/>
-    
-      <category term="并查集" scheme="https://wuhongbin.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
-    
-      <category term="Prim(普里姆)算法" scheme="https://wuhongbin.github.io/tags/Prim-%E6%99%AE%E9%87%8C%E5%A7%86-%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="Kruskal(克鲁斯卡尔)算法" scheme="https://wuhongbin.github.io/tags/Kruskal-%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94-%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
