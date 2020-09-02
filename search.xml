@@ -1394,14 +1394,14 @@
       
       <categories>
           
-          <category> 项目实战 </category>
+          <category> Qt 项目 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> QT5 </tag>
+            <tag> Qt </tag>
             
         </tags>
       
@@ -1410,7 +1410,7 @@
     
     
     <entry>
-      <title>Qt5 程序打包发布总结</title>
+      <title>Qt 程序打包发布总结</title>
       <link href="/2020/04/15/Qt5%20%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E6%80%BB%E7%BB%93/"/>
       <url>/2020/04/15/Qt5%20%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E6%80%BB%E7%BB%93/</url>
       
@@ -1419,14 +1419,14 @@
       
       <categories>
           
-          <category> QT5 笔记 </category>
+          <category> Qt 笔记 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> QT5 </tag>
+            <tag> Qt </tag>
             
         </tags>
       
@@ -1435,23 +1435,23 @@
     
     
     <entry>
-      <title>Qt 项目管理文件（.pro）及其作用详解</title>
+      <title>Qt 项目管理文件(.pro)及其作用详解</title>
       <link href="/2020/04/05/Qt%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%EF%BC%88.pro%EF%BC%89%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/"/>
       <url>/2020/04/05/Qt%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%EF%BC%88.pro%EF%BC%89%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8%E8%AF%A6%E8%A7%A3/</url>
       
-        <content type="html"><![CDATA[<h1 id="Qt项目管理文件（-pro）及其作用详解"><a href="#Qt项目管理文件（-pro）及其作用详解" class="headerlink" title="Qt项目管理文件（.pro）及其作用详解"></a>Qt项目管理文件（.pro）及其作用详解</h1><h2 id="项目文件目录树"><a href="#项目文件目录树" class="headerlink" title="项目文件目录树"></a>项目文件目录树</h2><p>在 Qt Creator 中新建一个 Widget Application 项目 samp2_1，在选择窗口基类的页面选择 QWidget 作为窗体基类，并选中“Generate form”复选框。创建后的项目文件目录树如图 1 所示。</p><p> <img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/181229/2-1Q22Z95914431.gif" alt="img"><br> 图 1 项目文件的目录树</p><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p> 这个项目包含以下一些文件：</p><blockquote><p>（1）项目管理文件 samp2_1.pro，存储项目设置的文件。</p><p>（2）主程序入口文件 main.cpp，实现 main()函数的程序文件。</p><p>（3）窗体界面文件 widget.ui，一个 XML 格式存储的窗体上的元件及 其布局的文件。</p><p>（4）widget.h 是所设计的窗体类的头文件，widget.cpp 是 widget.h 里 定义类的实现文件。C++中，任何窗体或界面组件都是用类封装的，一个类一般有一个头文件（.h 文件）和一个源程序文件（.cpp 文件）。</p></blockquote><h2 id="项目管理文件（-pro文件）"><a href="#项目管理文件（-pro文件）" class="headerlink" title="项目管理文件（.pro文件）"></a>项目管理文件（.pro文件）</h2><p> 下面介绍一下项目管理文件（.pro文件）。</p><p>后缀为“ <strong>.pro</strong> ”的文件是项目的管理文件，文件名就是项目的名称，如本项目中的 <strong>samp2_1.pro</strong>。 下面是 *<em>samp2_1.pro *</em>文件的内容。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QT       += core gui</span><br><span class="line">greaterThan(QT_MAJOR_VERSION, <span class="number">4</span>): QT += widgets</span><br><span class="line">TARGET = samp2_1</span><br><span class="line">TEMPLATE = app</span><br><span class="line">SOURCES += \</span><br><span class="line">        main.cpp \</span><br><span class="line">        widget.cpp</span><br><span class="line">HEADERS += \</span><br><span class="line">        widget.h</span><br><span class="line">FORMS += \</span><br><span class="line">        widget.ui</span><br></pre></td></tr></table></figure><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>项目管理文件用于记录项目的一些设置，以及项目包含文件的组织管理。</p><h3 id="代码介绍"><a href="#代码介绍" class="headerlink" title="代码介绍"></a>代码介绍</h3><p>（1）“Qt += core gui”表示项目中加入 core gui 模块。core gui 是 Qt 用于 GUI 设计的类库模块，如果创建的是控制台（Console）应用程序，就不需要添加 core gui。</p><p>（2） Qt 类库以模块的形式组织各种功能的类，根据项目涉及的功能需求，在项目中添加适当的类库模块支持。例如，如果项目中使用到了涉及数据库操作的类就需要用到 sql 模块，在 pro 文件中需要增加如下一行：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Qt +=sql</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-src="/images/qt5.png" alt=""></p><p>（3）samp2_1.pro 中的第 2 行是：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">greaterThan(Qt_MAJOR_VERSION, <span class="number">4</span>): Qt += widgets</span><br></pre></td></tr></table></figure><p>这是个条件执行语句，表示当 Qt 主版本大于 <strong>4</strong> 时，才加入 widgets 模块。</p><p> （4）“ TARGET = samp2_1 ”表示生成的目标可执行文件的名称，即编译后生成的可执行文件是 samp2_1.exe。</p><p> （5）“TEMPLATE = app”表示项目使用的模板是 app，即 application，是一般的应用程序。</p><p> （6）后面的 SOURCES、HEADERS、FORMS 记录了项目中包含的源程序文件、头文件和窗体文件（.ui 文件）的名称。这些文件列表是 Qt  Creator  自动添加到项目管理文件里面的，用户不需要手动修改。当添加一个文件到项目，或从项目里删除一个文件时，项目管理文件里的条目会自动修改。</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="项目文件目录树"><a href="#项目文件目录树" class="headerlink" title="项目文件目录树"></a>项目文件目录树</h2><p>在 Qt Creator 中新建一个 Widget Application 项目 samp2_1，在选择窗口基类的页面选择 QWidget 作为窗体基类，并选中“Generate form”复选框。创建后的项目文件目录树如图 1 所示。</p><p> <img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/181229/2-1Q22Z95914431.gif" alt="img"><br> 图 1 项目文件的目录树</p><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p> 这个项目包含以下一些文件：</p><blockquote><p>（1）项目管理文件 samp2_1.pro，存储项目设置的文件。</p><p>（2）主程序入口文件 main.cpp，实现 main()函数的程序文件。</p><p>（3）窗体界面文件 widget.ui，一个 XML 格式存储的窗体上的元件及 其布局的文件。</p><p>（4）widget.h 是所设计的窗体类的头文件，widget.cpp 是 widget.h 里 定义类的实现文件。C++中，任何窗体或界面组件都是用类封装的，一个类一般有一个头文件（.h 文件）和一个源程序文件（.cpp 文件）。</p></blockquote><h2 id="项目管理文件（-pro文件）"><a href="#项目管理文件（-pro文件）" class="headerlink" title="项目管理文件（.pro文件）"></a>项目管理文件（.pro文件）</h2><p> 下面介绍一下项目管理文件（.pro文件）。</p><p>后缀为“ <strong>.pro</strong> ”的文件是项目的管理文件，文件名就是项目的名称，如本项目中的 <strong>samp2_1.pro</strong>。 下面是 *<em>samp2_1.pro *</em>文件的内容。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QT       += core gui</span><br><span class="line">greaterThan(QT_MAJOR_VERSION, <span class="number">4</span>): QT += widgets</span><br><span class="line">TARGET = samp2_1</span><br><span class="line">TEMPLATE = app</span><br><span class="line">SOURCES += \</span><br><span class="line">        main.cpp \</span><br><span class="line">        widget.cpp</span><br><span class="line">HEADERS += \</span><br><span class="line">        widget.h</span><br><span class="line">FORMS += \</span><br><span class="line">        widget.ui</span><br></pre></td></tr></table></figure><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>项目管理文件用于记录项目的一些设置，以及项目包含文件的组织管理。</p><h3 id="代码介绍"><a href="#代码介绍" class="headerlink" title="代码介绍"></a>代码介绍</h3><p>（1）“Qt += core gui”表示项目中加入 core gui 模块。core gui 是 Qt 用于 GUI 设计的类库模块，如果创建的是控制台（Console）应用程序，就不需要添加 core gui。</p><p>（2） Qt 类库以模块的形式组织各种功能的类，根据项目涉及的功能需求，在项目中添加适当的类库模块支持。例如，如果项目中使用到了涉及数据库操作的类就需要用到 sql 模块，在 pro 文件中需要更改如下：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT       += core gui sql</span><br></pre></td></tr></table></figure><p><img src= "/img/loading.gif" data-src="/images/qt5.png" alt=""></p><p>（3）samp2_1.pro 中的第 2 行是：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">greaterThan(Qt_MAJOR_VERSION, <span class="number">4</span>): Qt += widgets</span><br></pre></td></tr></table></figure><p>这是个条件执行语句，表示当 Qt 主版本大于 <strong>4</strong> 时，才加入 widgets 模块。</p><p> （4）“ TARGET = samp2_1 ”表示生成的目标可执行文件的名称，即编译后生成的可执行文件是 samp2_1.exe。</p><p> （5）“TEMPLATE = app”表示项目使用的模板是 app，即 application，是一般的应用程序。</p><p> （6）后面的 SOURCES、HEADERS、FORMS 记录了项目中包含的源程序文件、头文件和窗体文件（.ui 文件）的名称。这些文件列表是 Qt  Creator  自动添加到项目管理文件里面的，用户不需要手动修改。当添加一个文件到项目，或从项目里删除一个文件时，项目管理文件里的条目会自动修改。</p>]]></content>
       
       
       <categories>
           
-          <category> QT5 笔记 </category>
+          <category> Qt 笔记 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> QT5 </tag>
+            <tag> Qt </tag>
             
         </tags>
       
@@ -1460,7 +1460,7 @@
     
     
     <entry>
-      <title>Qt Creator 常用快捷键</title>
+      <title>Qt Creator 常用快捷键 总结</title>
       <link href="/2020/04/05/Qt%20Creator%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/"/>
       <url>/2020/04/05/Qt%20Creator%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/</url>
       
@@ -1469,14 +1469,14 @@
       
       <categories>
           
-          <category> QT5 笔记 </category>
+          <category> Qt 笔记 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> QT5 </tag>
+            <tag> Qt </tag>
             
         </tags>
       
