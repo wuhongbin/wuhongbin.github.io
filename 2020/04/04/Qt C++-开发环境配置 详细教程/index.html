@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Qt C++ 开发环境配置 详细教程 | 时光如水の总是无言</title><meta name="description" content="Qt 下载Qt 体积很大，有 1GB~3GB，官方下载通道非常慢，相信很多读者会崩溃，所以建议大家使用国内的镜像网站（较快），或者使用迅雷下载（很快）。作为 Qt 下载教程，本文会同时讲解以上三种下载方式。 Qt 官方下载（非常慢）Qt 官网有一个专门的资源下载网站，所有的开发环境和相关工具都可以从这里下载，具体地址是：http:&#x2F;&#x2F;download.qt.io&#x2F;  ​"><meta name="keywords" content="Qt"><meta name="author" content="时光如水の总是无言"><meta name="copyright" content="时光如水の总是无言"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wuhongbin.github.io/2020/04/04/Qt%20C++-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%20%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="Qt C++ 开发环境配置 详细教程"><meta property="og:url" content="https://wuhongbin.github.io/2020/04/04/Qt%20C++-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%20%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"><meta property="og:site_name" content="时光如水の总是无言"><meta property="og:description" content="Qt 下载Qt 体积很大，有 1GB~3GB，官方下载通道非常慢，相信很多读者会崩溃，所以建议大家使用国内的镜像网站（较快），或者使用迅雷下载（很快）。作为 Qt 下载教程，本文会同时讲解以上三种下载方式。 Qt 官方下载（非常慢）Qt 官网有一个专门的资源下载网站，所有的开发环境和相关工具都可以从这里下载，具体地址是：http:&#x2F;&#x2F;download.qt.io&#x2F;  ​"><meta property="og:image" content="https://s1.ax1x.com/2020/06/28/N2tLmF.png"><meta property="article:published_time" content="2020-04-04T12:10:43.000Z"><meta property="article:modified_time" content="2020-09-03T07:32:46.319Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="Qt Creator 常用快捷键 总结" href="https://wuhongbin.github.io/2020/04/05/Qt%20Creator%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/"><link rel="next" title="C++ 指针的引用和指向引用的指针" href="https://wuhongbin.github.io/2020/04/04/C++%20%E6%8C%87%E9%92%88%E7%9A%84%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E5%90%91%E5%BC%95%E7%94%A8%E7%9A%84%E6%8C%87%E9%92%88/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="时光如水の总是无言" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">73</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">54</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book-open"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-smile-wink"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw far fa-comment-dots"></i><span> 留言</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Qt-下载"><span class="toc-number">1.</span> <span class="toc-text">Qt 下载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt-官方下载（非常慢）"><span class="toc-number">1.1.</span> <span class="toc-text">Qt 官方下载（非常慢）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt-国内镜像站下载（较快）"><span class="toc-number">1.2.</span> <span class="toc-text">Qt 国内镜像站下载（较快）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#国内镜像网站"><span class="toc-number">1.2.1.</span> <span class="toc-text">国内镜像网站</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迅雷下载（很快）"><span class="toc-number">1.3.</span> <span class="toc-text">迅雷下载（很快）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">1.4.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows安装"><span class="toc-number">2.</span> <span class="toc-text">Windows安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">2.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-注册和登录"><span class="toc-number">2.2.</span> <span class="toc-text">1) 注册和登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装路径和关联文件"><span class="toc-number">2.3.</span> <span class="toc-text">2) 安装路径和关联文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-选择安装组件"><span class="toc-number">2.4.</span> <span class="toc-text">3) 选择安装组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Qt-安装组件及其说明"><span class="toc-number">2.5.</span> <span class="toc-text">Qt 安装组件及其说明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux安装"><span class="toc-number">3.</span> <span class="toc-text">Linux安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-注册和登录-1"><span class="toc-number">3.1.</span> <span class="toc-text">1) 注册和登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装路径"><span class="toc-number">3.2.</span> <span class="toc-text">2) 安装路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-选择安装组件-1"><span class="toc-number">3.3.</span> <span class="toc-text">3) 选择安装组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束"><span class="toc-number">4.</span> <span class="toc-text">结束</span></a></li></ol></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s1.ax1x.com/2020/06/28/N2tLmF.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">时光如水の总是无言</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book-open"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-smile-wink"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw far fa-comment-dots"></i><span> 留言</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Qt C++ 开发环境配置 详细教程</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date" title="发表于 2020-04-04 20:10:43"><i class="fa-fw far fa-calendar-alt"></i> 发表于 2020-04-04</time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/">开发配置</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">4k</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 13 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Qt-下载"><a href="#Qt-下载" class="headerlink" title="Qt 下载"></a>Qt 下载</h1><p>Qt 体积很大，有 1GB~3GB，官方下载通道非常慢，相信很多读者会崩溃，所以建议大家使用国内的镜像网站（较快），或者使用迅雷下载（很快）。作为 Qt 下载教程，本文会同时讲解以上三种下载方式。</p>
+<h2 id="Qt-官方下载（非常慢）"><a href="#Qt-官方下载（非常慢）" class="headerlink" title="Qt 官方下载（非常慢）"></a>Qt 官方下载（非常慢）</h2><p>Qt 官网有一个专门的资源下载网站，所有的开发环境和相关工具都可以从这里下载，具体地址是：<a href="http://download.qt.io/" target="_blank" rel="noopener">http://download.qt.io/</a></p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QF229606.gif" alt="Qt官方下载网站截图"></p>
+<p>​                                                                                     图1：Qt 官方下载网站截图</p>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">archive</td>
+<td align="center">各种 Qt 开发工具安装包，新旧都有（可以下载 Qt 开发环境和源代码）。</td>
+</tr>
+<tr>
+<td align="center">community_releases</td>
+<td align="center">社区定制的 Qt 库，Tizen 版 Qt 以及 Qt 附加源码包。</td>
+</tr>
+<tr>
+<td align="center">development_releases</td>
+<td align="center">开发版，有新的和旧的不稳定版本，在 Qt 开发过程中的非正式版本。</td>
+</tr>
+<tr>
+<td align="center">learning</td>
+<td align="center">有学习 Qt 的文档教程和示范视频。</td>
+</tr>
+<tr>
+<td align="center">ministro</td>
+<td align="center">迷你版，目前是针对 <a href="http://c.biancheng.net/android/" target="_blank" rel="noopener">Android</a> 的版本。</td>
+</tr>
+<tr>
+<td align="center">official_releases</td>
+<td align="center">正式发布版，是与开发版相对的稳定版 Qt 库和开发工具（可以下载Qt开发环境和源代码）。</td>
+</tr>
+<tr>
+<td align="center">online</td>
+<td align="center">Qt 在线安装源。</td>
+</tr>
+<tr>
+<td align="center">snapshots</td>
+<td align="center">预览版，最新的开发测试中的 Qt 库和开发工具。</td>
+</tr>
+</tbody></table>
+<p> archive 和 official_releases 两个目录都有最新的 Qt 开发环境安装包，我们以 archive 目录里的内容为例来说明。点击进入 archive 目录，会看到四个子目录：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QG4223W.gif" alt="archive的四个子目录"></p>
+<p>​                                                                                                图2：进入 archive 目录</p>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">vsaddin</td>
+<td align="center">这是 Qt 针对 Visual Studio 集成的插件，本教程基本不使用 Visual Studio ，所以不需要插件。</td>
+</tr>
+<tr>
+<td align="center">qtcreator</td>
+<td align="center">这是 Qt 官方的集成开发工具，但是 qtcreator 本身是个空壳，它没有编译套件和 Qt 开发库。    除了老版本的 Qt 4 需要手动下载 qtcreator、编译套件、Qt 开发库进行搭配之外，一般用不到。对于我们教程压根不需要下载它，因为 Qt 5 有专门的大安装包，里面包含开发需要的东西，并且能自动配置好。</td>
+</tr>
+<tr>
+<td align="center">qt</td>
+<td align="center">这是 Qt 开发环境的下载目录，我们刚说的 Qt 5 的大安装包就在这里面。</td>
+</tr>
+<tr>
+<td align="center">online_installers</td>
+<td align="center">在线安装器，国内用户不建议使用，在线安装是龟速，还经常断线。我们教程采用的全部是离线的大安装包。</td>
+</tr>
+</tbody></table>
+<p> 我们再进入 qt 子目录 ，看到如下列表：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QH249511.gif" alt="qt子目录"></p>
+<p>​                                                                                         图3：进入 qt 子目录</p>
+<p> 上图没有列完整，这个 qt 目录包含了所有的 Qt 版本，从 1.0 到目前的 5.12 。</p>
+<p> 由于 Qt 5.9 是一个长期技术支持版本（Long Term Support，LTS），在未来几年里都将有更新支持，因此，本教程以 Qt 5.9 LTS 版本为例进行讲解，并且所有实例程序均使用 Qt 5.9 编译测试通过。</p>
+<blockquote>
+<p>Qt 的上一个 LTS 版本是 5.6，它其实已经超出支持期了。</p>
+</blockquote>
+<p>进入 5.9 目录，会看到各种子版本：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QI023222.gif" alt=" qt 5.9 子目录"></p>
+<p>​                                                                                    图4：Qt 5.9 的各个子版本</p>
+<p> 这里解释一下 Qt 的版本号，比如 5.9.8 是完整的 Qt 版本号，第一个数字 5 是大版本号（major），第二个数字 9  是小版本号(minor)，第三个数字 8 是补丁号 (patch)。 只要前面两个数字相同，Qt  的特性就是一致的，最后的数字是对该版本的补丁更新。也就是说本教程对 5.9.* 系列的 Qt 都是通用的，下载 5.9.*  任意一个版本都可以，这里我们以下载 5.9.0。</p>
+<p> 点击 5.9.0，进入子目录：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QK0309D.gif" alt="Qt 5.9.0 下载页面"></p>
+<p>​                                                                                             图5：Qt 5.9.0 下载页面</p>
+<p> 根据不同的操作系统，选择不同的安装包即可，不用管源码包，除非你想自己编译或者阅读源码。</p>
+<p> 我们以 Windows 安装包（qt-opensource-windows-x86-5.9.0.exe）讲解一下 Qt 安装包命名规则，其中：</p>
+<ul>
+<li>opensource 是指开源版本；</li>
+<li>windows 是指开发环境的操作系统；</li>
+<li>x86 是指 32 位系统；</li>
+<li>5.9.0 是 Qt 版本号。</li>
+</ul>
+<h2 id="Qt-国内镜像站下载（较快）"><a href="#Qt-国内镜像站下载（较快）" class="headerlink" title="Qt 国内镜像站下载（较快）"></a>Qt 国内镜像站下载（较快）</h2><p>请读者注意图5中最后一栏的 Details 链接（红色方框圈起来的地方）。点击 Details 链接可以进入详情页，在该页面可以看到文件的大小、校验和以及世界各地镜像下载链接（这才是重点）。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190528/1-1Z52QP11N93.gif" alt="国内镜像下载链接"></p>
+<p>​                                                                                            图6：国内镜像下载链接</p>
+<p> 可以清楚地看到，Qt 在国内的有三个镜像网站可以下载，点击这些地址中的一个就可以下载，从国内镜像网站下载速度快一些。</p>
+<h3 id="国内镜像网站"><a href="#国内镜像网站" class="headerlink" title="国内镜像网站"></a>国内镜像网站</h3><p>这里给大家推荐几个国内著名的 Qt 镜像网站，主要是各个高校的：</p>
+<ul>
+<li>中国科学技术大学：<a href="http://mirrors.ustc.edu.cn/qtproject/" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/qtproject/</a></li>
+<li>清华大学：<a href="https://mirrors.tuna.tsinghua.edu.cn/qt/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/qt/</a></li>
+<li>北京理工大学：<a href="http://mirror.bit.edu.cn/qtproject/" target="_blank" rel="noopener">http://mirror.bit.edu.cn/qtproject/</a></li>
+<li>中国互联网络信息中心：<a href="https://mirrors.cnnic.cn/qt/" target="_blank" rel="noopener">https://mirrors.cnnic.cn/qt/</a></li>
+</ul>
+<p> 国内镜像网站的结构和官方是类似的，我们在第一部分已经分析过了，这里不再赘述。</p>
+<h2 id="迅雷下载（很快）"><a href="#迅雷下载（很快）" class="headerlink" title="迅雷下载（很快）"></a>迅雷下载（很快）</h2><p>将 Qt 软件的下载地址复制到迅雷的下载框，如果迅雷官方有资源，就会自动识别，下载速度就很快了。</p>
+<p> 如何找到 Qt 软件的下载地址呢？以清华大学开源软件镜像站为例，进入 Qt 5.9.0 的下载目录（<a href="https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/），在某个链接处单击鼠标右键，会弹出一个菜单，选择“复制链接地址”，如下图所示：" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/），在某个链接处单击鼠标右键，会弹出一个菜单，选择“复制链接地址”，如下图所示：</a></p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z529105333515.gif" alt="找到Qt下载地址"></p>
+<p>​                                                                                                        图7：找到 Qt 下载地址</p>
+<p> 这样就把 Qt 5.9.0 的下载地址（具体为  <a href="https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/qt-opensource-windows-x86-5.9.0.exe）复制到了剪切板，然后再粘贴到迅雷的下载框：" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/qt-opensource-windows-x86-5.9.0.exe）复制到了剪切板，然后再粘贴到迅雷的下载框：</a></p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z529105R0a0.gif" alt="把Qt下载地址粘贴到迅雷下载框"></p>
+<p>​                                                                                 图8：把Qt下载地址粘贴到迅雷下载框</p>
+<p> 点击 *<em>立即下载 *</em>按钮，稍等片刻，迅雷会自动匹配到资源，速度飞快</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z529110011311.gif" alt="下载速度 2.7MB/s"></p>
+<p>​                                                                                            图9：下载速度 2.7MB/s</p>
+<p>注意，常用的 Qt  版本一般都能匹配到资源，但是不保证每个版本都能匹配到资源，上面的例子仅对清华大学镜像站的 Qt 5.9.0 Windows  版 <a href="https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/qt-opensource-windows-x86-5.9.0.exe" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/qt/archive/qt/5.9/5.9.0/qt-opensource-windows-x86-5.9.0.exe</a> 有效。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>对 Qt 版本更新感兴趣的读者请访问 Qt wiki 网站，地址为：<a href="https://wiki.qt.io/Main" target="_blank" rel="noopener">https://wiki.qt.io/Main</a></p>
+<p> Qt wiki 网站会显示最新的正式版、LTS 版、正在开发中的版本等等，比主站 <a href="https://www.qt.io/" target="_blank" rel="noopener">https://www.qt.io/</a> 靠谱多了。Qt 主站因为商业推广的原因，安装包的下载步骤非常繁琐。</p>
+<h1 id="Windows安装"><a href="#Windows安装" class="headerlink" title="Windows安装"></a>Windows安装</h1><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>目前较高版本的 Qt 仅支持 Win7 及其以后的操作系统，不支持 Win XP；使用 Win XP 的读者请安装 Qt 5.5.1 之前的版本。</p>
+<p> Qt 占用的存储空间很大，安装之前建议先准备好 8GB 以上的磁盘空间。对于目前 Qt 最新版开发环境，如果不安装源代码包，实际占用大约 5.5GB；如果选择安装源码包，大约占用 7.5GB。</p>
+<p> 双击下载得到的 qt-opensource-windows-x86-5.9.0.exe 即可开始安装。Qt 的安装过程和普通的 Windows 软件一样，按照向导进行操作即可。</p>
+<p> 关于 Qt 的安装需要说明以下几点。</p>
+<h2 id="1-注册和登录"><a href="#1-注册和登录" class="headerlink" title="1) 注册和登录"></a>1) 注册和登录</h2><p>Qt 在安装过程中会提示用户进行注册和登录，不用理会，跳过（Skip）即可，实际开发时不需要登录。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z52913304V60.gif" alt=""></p>
+<h2 id="2-安装路径和关联文件"><a href="#2-安装路径和关联文件" class="headerlink" title="2) 安装路径和关联文件"></a>2) 安装路径和关联文件</h2><p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z529133255346.gif" alt=""></p>
+<p>Qt 允许用户自定义安装路径，但是请注意，安装路径不能带空格、中文字符或者其它任何特殊字符。</p>
+<p>另外，该界面还会询问是否关联特定的文件类型。如果关联（默认是关联的），特定后缀的文件（包括 .cpp 文件）默认使用 Qt 打开。我喜欢使用纯文本编辑器（例如 Sublime Text）来打开 C++ 源文件，所以我取消了该选项，读者根据自己的实际情况定夺。</p>
+<h2 id="3-选择安装组件"><a href="#3-选择安装组件" class="headerlink" title="3) 选择安装组件"></a>3) 选择安装组件</h2><p>Qt 安装过程中最关键的一步是组件的选择，请看下图：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z52915401NT.gif" alt="Qt组件"></p>
+<p> Qt 的安装组件分为两部分：一部分是“Qt 5.9”分类下的，该分类包含的是真正的 Qt 开发库组件；另一部分是“Tools”分类下的，该分类包含的是集成开发环境和编译工具。</p>
+<h2 id="Qt-安装组件及其说明"><a href="#Qt-安装组件及其说明" class="headerlink" title="Qt 安装组件及其说明"></a>Qt 安装组件及其说明</h2><table>
+<thead>
+<tr>
+<th align="center">组件</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"><strong>“Qt 5.9”分类下的开发组件</strong></td>
+</tr>
+<tr>
+<td align="center">MinGW 5.3.0 32 bit</td>
+<td align="center">编译器模块。MinGW 是 Minimalist GNU for Windows 的缩写，MinGW 是 Windows 平台上使用的 GNU 工具集导入库的集合。是本教程使用 MinGW 编译，所以必须安装。</td>
+</tr>
+<tr>
+<td align="center">UWP</td>
+<td align="center">UWP 是 Windows 10 中 Universal Windows Platform 的简称，有不同编译器类型的 UWP，属于 MSVC 编译器生成的 Qt 库。如果不是开发 UWP 应用程序，就不需要，直接忽略。</td>
+</tr>
+<tr>
+<td align="center">MSVC</td>
+<td align="center">针对 Windows 平台上的 MSVC 编译器的 Qt 组件，如 msvc2015 32-bit 和 msvc2015 64-bit  等。安装该组件需要计算机上已经安装相应版本的 Visual Studio。如果你不使用 MSVC 编译器进行开发，就不用安装。本教程使用  MinGW 编译组件，所以不用安装 MSVC *** 组件。</td>
+</tr>
+<tr>
+<td align="center">Android</td>
+<td align="center">这是针对安卓应用开发的 Qt 库，如果读者有安卓开发这方面需求可以自己选择安装，一般情况下用不到。</td>
+</tr>
+<tr>
+<td align="center">Sources</td>
+<td align="center">Qt 的源代码包，除非你想阅读 Qt 的源码，否则不用安装。</td>
+</tr>
+<tr>
+<td align="center">Qt</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>“Tools”分类下的开发组件</strong></td>
+</tr>
+<tr>
+<td align="center">组件</td>
+<td align="center">说明</td>
+</tr>
+<tr>
+<td align="center">Qt Creator 4.3.0</td>
+<td align="center">这是集成开发环境，强制安装的，以后所有的项目和代码都在 Qt Creator 里面新建和编辑。</td>
+</tr>
+<tr>
+<td align="center">Qt Creator 4.3.0 CDB Debugger surpport</td>
+<td align="center">用于和 CDB 调试工具对接，默认安装，一般用于调试 VC 编译的 Qt 程序。</td>
+</tr>
+<tr>
+<td align="center">MinGW 5.3.0</td>
+<td align="center">这是开源的编译器套件，这本教程必须用到的，需要读者勾选安装。</td>
+</tr>
+<tr>
+<td align="center">Strawberry Perl 5.22.1.3</td>
+<td align="center">用于编译 Qt 源代码的 Perl 开发环境，不需要安装。如果读者以后用到，也可以另外手动安装，在搜索引擎搜索 Strawberry Perl 关键词，去 Strawberry Perl 官网下载最新的安装包是一样用的。</td>
+</tr>
+</tbody></table>
+<p> 选择完了组件，根据向导一步一步操作就可以了。安装完成后，在 Windows“开始”菜单中会看到 Qt 5.9.0 程序组。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190529/1-1Z529155424L0.gif" alt="Qt 5.9.0所包含的程序"></p>
+<table>
+<thead>
+<tr>
+<th align="center">程序</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Qt Creator 4.6.2 (Enterprise)</td>
+<td align="center">Qt 的集成开发环境，本教程就使用它来创建和管理 Qt 项目。</td>
+</tr>
+<tr>
+<td align="center">Assistant（Qt 助手）</td>
+<td align="center">用来查看帮助文档，已被集成在 Qt Creator 中。</td>
+</tr>
+<tr>
+<td align="center">Designer（Qt 设计师）</td>
+<td align="center">图形界面可视化编辑工具，已被集成在 Qt Creator 中，在 Qt Creator 中编辑或创建界面文件时，就可以自动打开。</td>
+</tr>
+<tr>
+<td align="center">Linguist（Qt 语言家）</td>
+<td align="center">多国语言翻译支持工具，可以用来编辑语言资源文件，在开发多语言界面的应用程序时会用到。</td>
+</tr>
+<tr>
+<td align="center">Qt 5.11.1 for Desktop (MinGW 5.3.0 32bit)</td>
+<td align="center">Qt 命令行工具，用来配置 Qt 开发环境（主要是设置 PATH 变量）。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>温馨提示</strong>：你可以将 Assistant 直接拖到桌面建立快捷方式，方便自己以后查询使用。</p>
+</blockquote>
+<h1 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h1><p>Linux 发行版虽然众多，但 Qt 安装过程大同小异，本节以 CentOS 7 为例来演示 Qt 的安装。</p>
+<p>上文已经讲解了 Qt 安装包的下载方式，Qt 5.9.0 Linux 安装包的名称为 qt-opensource-linux-x64-5.9.0.run。</p>
+<p> 下载的 run 文件不一定具有可执行权限， 可以执行如下命令开启执行权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x &#x2F;文件夹路径&#x2F;qt-opensource-linux-x64-5.9.0.run</span><br></pre></td></tr></table></figure>
+
+<p>将“文件夹路径”替换为自己系统里该 run 文件的路径即可。然后可以直接点击运行该 run 文件，开始安装。</p>
+<p>注意以下是以普通用户权限安装的, 安装位置是 /home/用户名/Qt5.9.0/, 如果希望安装到其他的目录(如 /opt/ 目录)，是需要 root 权限的。</p>
+<p>下面示范简单的普通用户安装方式，需要用户主目录 /home 所在磁盘分区至少剩余 2GB 空间。所示范的是 64 位安装包，使用的发行版是 CentOS 7（64 位）。</p>
+<p> 运行 qt-opensource-linux-x64-5.9.0.run 文件，根据向导一步步安装就可以了。关于 Qt 的安装需要说明以下几点。</p>
+<h2 id="1-注册和登录-1"><a href="#1-注册和登录-1" class="headerlink" title="1) 注册和登录"></a>1) 注册和登录</h2><p>Qt 在安装过程中会提示用户进行注册和登录，不用理会，跳过（Skip）即可，实际开发时不需要登录。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190530/1-1Z530154Z9604.gif" alt="Qt 安装过程中提示用户注册"></p>
+<p>​                                                                                图1：Qt 安装过程中提示用户注册</p>
+<h2 id="2-安装路径"><a href="#2-安装路径" class="headerlink" title="2) 安装路径"></a>2) 安装路径</h2><p>Qt 在安装过程中允许自定义安装路径，我将 Qt 安装在主目录下的 programs/Qt5.9.0 文件夹中，一般使用默认路径即可。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190531/1-1Z531145A2940.gif" alt="指定 Qt 安装路径"></p>
+<p>​                                                                                         图2：指定 Qt 安装路径</p>
+<h2 id="3-选择安装组件-1"><a href="#3-选择安装组件-1" class="headerlink" title="3) 选择安装组件"></a>3) 选择安装组件</h2><p>Qt 安装过程中最关键的一步是组件的选择，请看下图：</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190531/1-1Z53115100C14.gif" alt="Qt 组件"></p>
+<p>​                                                                                                    图3：Qt 组件</p>
+<p> Qt 的安装组件分为两部分：一部分是“Qt 5.9”分类下的，该分类包含的是 Qt  开发库，也就是动态链接库或者静态链接库；另一部分是“Tools”分类下的，该分类包含的是集成开发环境（可执行程序），也就是 Qt  Creator（在 Windows 下还会有其它工具）</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">“Qt 5.9”分类下的开发库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">开发库</td>
+<td align="center">说明</td>
+</tr>
+<tr>
+<td align="center">Desktop gcc 64-bit</td>
+<td align="center">这是使用桌面版 GCC 64-bit 编译环境生成的 Qt 库，是 Qt 的核心，必须安装。    注意，虽然名字看起来像是 GCC 编译器套件，但实际上说的是 Qt 库的编译环境。大部分 Linux 发行版 都会预装 GCC 编译器套件，所以 Qt 安装包没必要附带它们。</td>
+</tr>
+<tr>
+<td align="center">Android</td>
+<td align="center">这是针对安卓应用开发的 Qt 库，如果读者有安卓开发这方面需求可以自己选择安装，一般情况下用不到。</td>
+</tr>
+<tr>
+<td align="center">Sources</td>
+<td align="center">Qt 的源代码包，除非你想阅读 Qt 的源码，否则不用安装。</td>
+</tr>
+<tr>
+<td align="center">Qt</td>
+<td align="center">Qt 的附加模块，大部分建议安装，这些附加模块括号里的 TP 是指 Technology Preview  ，技术预览模块的意思，还处在功能测试阶段，不是正式版模块；附加模块括号里的 Deprecated  是指抛弃的旧模块，兼容旧代码使用的，一般用不到。这些附加模块读者可以选择部分或都勾选了安装，占用空间不大。    部分组件说明：  Qt Charts 是二维图表模块，用于绘制柱状图、饼图、曲线图等常用二维图表。 Qt Data Visualization 是三维数据图表模块，用于数据的三维显示，如散点的三维空间分布、三维曲面等。 Qt Scritp（Deprecated）是脚本模块，已被抛弃，不建议安装。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>“Tools”分类下的集成开发环境</strong></td>
+</tr>
+<tr>
+<td align="center">集成开发环境</td>
+<td align="center">说明</td>
+</tr>
+<tr>
+<td align="center">Qt Creator 4.3.0</td>
+<td align="center">这是集成开发环境，强制安装的，以后所有的项目和代码都在 Qt Creator 里面新建和编辑。</td>
+</tr>
+</tbody></table>
+<p> 选择完了组件，根据向导一步一步操作就可以了。安装完成后，在左上角“应用程序 –&gt; 编程”菜单中可以看到 Qt Creator，证明安装成功了。点击 Qt Creator，就可以开始 Qt 编程了。</p>
+<p><img src= "/img/loading.gif" data-src="http://c.biancheng.net/uploads/allimg/190530/1-1Z5301P02L53.gif" alt="Qt 安装完成"></p>
+<p>​                                                                                                        图4：Qt 安装完成</p>
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>至此，马上开始你的Qt学习之旅吧！！！</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">时光如水の总是无言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://wuhongbin.github.io/2020/04/04/Qt%20C++-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%20%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">https://wuhongbin.github.io/2020/04/04/Qt%20C++-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%20%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wuhongbin.github.io" target="_blank">时光如水の总是无言</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Qt/">Qt</a></div><div class="post_share"><div class="social-share" data-image="https://s1.ax1x.com/2020/07/30/aK8jiQ.jpg" data-sites="wechat,weibo,qq,qzone,douban,google,facebook,twitter,linkedin"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><button class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/img/wechat.jpg" alt="微信" onclick="window.open('/img/wechat.jpg')"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/img/alipay.jpg" alt="支付宝" onclick="window.open('/img/alipay.jpg')"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></button></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/05/Qt%20Creator%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%80%BB%E7%BB%93/"><img class="prev-cover" data-src="https://s1.ax1x.com/2020/06/28/N2tLmF.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Qt Creator 常用快捷键 总结</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/04/C++%20%E6%8C%87%E9%92%88%E7%9A%84%E5%BC%95%E7%94%A8%E5%92%8C%E6%8C%87%E5%90%91%E5%BC%95%E7%94%A8%E7%9A%84%E6%8C%87%E9%92%88/"><img class="next-cover" data-src="https://s1.ax1x.com/2020/06/28/NgTarT.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++ 指针的引用和指向引用的指针</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/04/16/C++ Qt 项目实战(一)之文本编辑器/" title="C++ Qt 项目实战(一)之文本编辑器"><img class="relatedPosts_cover" data-src="https://s1.ax1x.com/2020/06/28/N2tLmF.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-16</div><div class="relatedPosts_title">C++ Qt 项目实战(一)之文本编辑器</div></div></a></div><div class="relatedPosts_item"><a href="/2020/04/15/Qt 程序打包发布 详细教程/" title="Qt 程序打包发布 详细教程"><img class="relatedPosts_cover" data-src="https://s1.ax1x.com/2020/06/28/N2tLmF.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-15</div><div class="relatedPosts_title">Qt 程序打包发布 详细教程</div></div></a></div><div class="relatedPosts_item"><a href="/2020/04/05/Qt Creator常用快捷键总结/" title="Qt Creator 常用快捷键 总结"><img class="relatedPosts_cover" data-src="https://s1.ax1x.com/2020/06/28/N2tLmF.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-05</div><div class="relatedPosts_title">Qt Creator 常用快捷键 总结</div></div></a></div><div class="relatedPosts_item"><a href="/2020/04/05/Qt 项目管理文件（.pro）及其作用详解/" title="Qt 项目管理文件(.pro)及其作用详解"><img class="relatedPosts_cover" data-src="https://s1.ax1x.com/2020/06/28/N2tLmF.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-05</div><div class="relatedPosts_title">Qt 项目管理文件(.pro)及其作用详解</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+let friends = '5c2105bbfe6rfc02a6f6ae26dad3819c,a0adabb31677df92a2405fb18a02ee4d'.split(',')
+let master = 'f8c7c3961aea2c203160e90cd3b3a26a'.split(',')
+let tagMeta = '博主,小伙伴,访客'.split(',')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'VCilC4G13xxkwKr2R13ozU6f-gzGzoHsz',
+  appKey: 'SUpuL0qdmqksfPHQfRsBOSJn',
+  notify: false,
+  verify: false,
+  placeholder: 'Please leave your footprints',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'zh-CN',
+  recordIP: 'false',
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: false,
+  requiredFields: requiredFields,
+  master: master,
+  friends: friends,
+  tagMeta: tagMeta,
+  metaPlaceholder: {"nick":"昵称/QQ号(必填)","mail":"邮箱(必填)","link":"网址(https://)"}
+});</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 时光如水の总是无言</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">本博客所有内容均收集于互联网或自己创作,方便与网友学习交流，如有侵权，请留言，立即处理!!</div><div class="icp"><a href="http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>© 晋ICP备案87650516号-8</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">简</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/click_heart.js"></script><script src="/js/third-party/ClickShowText.js"></script><script src="/js/search/local-search.js"></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
