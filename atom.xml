@@ -423,9 +423,9 @@
       <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
     
     
-      <category term="B+树" scheme="https://wuhongbin.github.io/tags/B-%E6%A0%91/"/>
-    
       <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
+    
+      <category term="B+树" scheme="https://wuhongbin.github.io/tags/B-%E6%A0%91/"/>
     
   </entry>
   
@@ -453,9 +453,9 @@
       <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
     
     
-      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
-    
       <category term="B树" scheme="https://wuhongbin.github.io/tags/B%E6%A0%91/"/>
+    
+      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
     
   </entry>
   
