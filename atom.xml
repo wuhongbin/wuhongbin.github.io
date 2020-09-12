@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wuhongbin.github.io/"/>
-  <updated>2020-09-03T15:32:27.820Z</updated>
+  <updated>2020-09-03T15:38:37.971Z</updated>
   <id>https://wuhongbin.github.io/</id>
   
   <author>
@@ -15,33 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Qt 信号与槽的自动关联机制</title>
-    <link href="https://wuhongbin.github.io/2020/07/03/Qt%20%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E8%81%94%E6%9C%BA%E5%88%B6/"/>
-    <id>https://wuhongbin.github.io/2020/07/03/Qt%20%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E8%81%94%E6%9C%BA%E5%88%B6/</id>
-    <published>2020-07-03T04:10:43.000Z</published>
-    <updated>2020-09-03T15:32:27.820Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于一些简单的事件判别，如点击按钮。无需写代码关联信号和槽函数。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">connect</span>(ui-&gt;Btnshowhello,SIGNAL(clicked(<span class="keyword">bool</span>)),<span class="keyword">this</span>,SLOT(BtnshowhelloSlot()));</span><br></pre></td></tr></table></figure><h1 id="信号与槽的自动关联机制"><a href="#信号与槽的自动关联机制" class="headerlink" title="信号与槽的自动关联机制"></a>信号与槽的自动关联机制</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> on_&lt;object name&gt;_&lt;signal name&gt;(&lt;signal parameters&gt;);</span><br></pre></td></tr></table></figure><h1 id="例"><a href="#例" class="headerlink" title="例"></a>例</h1><p>按钮已在对应的.ui文件中放置，命名为 <strong>CloseBtn</strong></p><p>头文件中声明：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> FORGETPWDWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORGETPWDWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QWidget&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ForgetPwdWindow</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">ForgetPwdWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~ForgetPwdWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_CloseBtn_clicked</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::ForgetPwdWindow *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// FORGETPWDWINDOW_H</span></span></span><br></pre></td></tr></table></figure><p>CPP文件实现：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"forgetpwdwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_forgetpwdwindow.h"</span></span></span><br><span class="line"></span><br><span class="line">ForgetPwdWindow::ForgetPwdWindow(QWidget *parent) :</span><br><span class="line">    QWidget(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::ForgetPwdWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ForgetPwdWindow::~ForgetPwdWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ForgetPwdWindow::on_CloseBtn_clicked</span><span class="params">()</span>        <span class="comment">//按下关闭按钮</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    emit <span class="keyword">this</span>-&gt;ForgetPwdWindowBack();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;对于一些简单的事件判别，如点击按钮。无需写代码关联信号和槽函数。&lt;/p&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;ta
-      
-    
-    </summary>
-    
-    
-      <category term="Qt 笔记" scheme="https://wuhongbin.github.io/categories/Qt-%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Qt" scheme="https://wuhongbin.github.io/tags/Qt/"/>
-    
-  </entry>
   
   <entry>
     <title>Qt 实时显示系统时间</title>
@@ -58,6 +31,33 @@
       
         &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我们用一个label控件来实时显示系统时间，用到 QTimer 和 QDateTime 这个两个类。&lt;/p&gt;
 &lt;h1 id=&quot;正题&quot;&gt;&lt;a 
+      
+    
+    </summary>
+    
+    
+      <category term="Qt 笔记" scheme="https://wuhongbin.github.io/categories/Qt-%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Qt" scheme="https://wuhongbin.github.io/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt 信号与槽的自动关联机制</title>
+    <link href="https://wuhongbin.github.io/2020/07/03/Qt%20%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E8%81%94%E6%9C%BA%E5%88%B6/"/>
+    <id>https://wuhongbin.github.io/2020/07/03/Qt%20%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E8%81%94%E6%9C%BA%E5%88%B6/</id>
+    <published>2020-07-03T04:10:43.000Z</published>
+    <updated>2020-09-03T15:32:27.820Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于一些简单的事件判别，如点击按钮。无需写代码关联信号和槽函数。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">connect</span>(ui-&gt;Btnshowhello,SIGNAL(clicked(<span class="keyword">bool</span>)),<span class="keyword">this</span>,SLOT(BtnshowhelloSlot()));</span><br></pre></td></tr></table></figure><h1 id="信号与槽的自动关联机制"><a href="#信号与槽的自动关联机制" class="headerlink" title="信号与槽的自动关联机制"></a>信号与槽的自动关联机制</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> on_&lt;object name&gt;_&lt;signal name&gt;(&lt;signal parameters&gt;);</span><br></pre></td></tr></table></figure><h1 id="例"><a href="#例" class="headerlink" title="例"></a>例</h1><p>按钮已在对应的.ui文件中放置，命名为 <strong>CloseBtn</strong></p><p>头文件中声明：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> FORGETPWDWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORGETPWDWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QWidget&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ForgetPwdWindow</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">ForgetPwdWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~ForgetPwdWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_CloseBtn_clicked</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::ForgetPwdWindow *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// FORGETPWDWINDOW_H</span></span></span><br></pre></td></tr></table></figure><p>CPP文件实现：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"forgetpwdwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_forgetpwdwindow.h"</span></span></span><br><span class="line"></span><br><span class="line">ForgetPwdWindow::ForgetPwdWindow(QWidget *parent) :</span><br><span class="line">    QWidget(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::ForgetPwdWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ForgetPwdWindow::~ForgetPwdWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ForgetPwdWindow::on_CloseBtn_clicked</span><span class="params">()</span>        <span class="comment">//按下关闭按钮</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    emit <span class="keyword">this</span>-&gt;ForgetPwdWindowBack();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;对于一些简单的事件判别，如点击按钮。无需写代码关联信号和槽函数。&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;ta
       
     
     </summary>
@@ -423,9 +423,9 @@
       <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
     
     
-      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
-    
       <category term="B+树" scheme="https://wuhongbin.github.io/tags/B-%E6%A0%91/"/>
+    
+      <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
     
   </entry>
   
@@ -453,9 +453,9 @@
       <category term="查找" scheme="https://wuhongbin.github.io/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%9F%A5%E6%89%BE/"/>
     
     
-      <category term="B树" scheme="https://wuhongbin.github.io/tags/B%E6%A0%91/"/>
-    
       <category term="多路平衡查找树" scheme="https://wuhongbin.github.io/tags/%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
+    
+      <category term="B树" scheme="https://wuhongbin.github.io/tags/B%E6%A0%91/"/>
     
   </entry>
   
